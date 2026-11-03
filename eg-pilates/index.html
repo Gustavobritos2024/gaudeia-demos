@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EG Pilates — Pilates Reformer en Mar del Plata</title>
+<meta name="description" content="EG Pilates: estudio de Pilates Reformer en Mar del Plata. 18 años de trayectoria, grupos reducidos y atención personalizada. Reservá tu lugar por WhatsApp.">
+<style>
+  :root{
+    --verde:#5c6f57;
+    --verde-osc:#3e4f3a;
+    --verde-claro:#eef1ea;
+    --crema:#faf6ef;
+    --arena:#e9e0d2;
+    --dorado:#b39b6d;
+    --tinta:#2e332c;
+    --wa:#25d366;
+    --wa-osc:#1eb856;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--crema);
+    color:var(--tinta);
+    line-height:1.6;
+    font-size:17px;
+  }
+  h1,h2,.serif{font-family:Georgia,"Times New Roman",serif;font-weight:500}
+  img{display:block;max-width:100%}
+  a{text-decoration:none}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(250,246,239,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--arena);
+  }
+  .header-in{
+    max-width:1080px;margin:0 auto;padding:10px 18px;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+  }
+  .brand{display:flex;align-items:center;gap:12px;color:var(--verde-osc)}
+  .brand .monograma{
+    width:46px;height:46px;flex:0 0 46px;border-radius:50%;
+    border:2px solid var(--dorado);
+    display:flex;align-items:center;justify-content:center;
+    font-family:Georgia,serif;font-size:19px;letter-spacing:1px;color:var(--verde-osc);
+    background:#fff;
+  }
+  .brand .nombre{font-family:Georgia,serif;font-size:22px;line-height:1.05}
+  .brand .bajada{font-size:10px;letter-spacing:3px;color:var(--dorado);text-transform:uppercase}
+  .btn-wa-head{
+    background:var(--wa);color:#fff;font-weight:600;font-size:15px;
+    padding:10px 16px;border-radius:999px;white-space:nowrap;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative;min-height:92svh;display:flex;align-items:flex-end;overflow:hidden;background:var(--verde-osc)}
+  .hero img.fondo{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    animation:zoom 22s ease-in-out infinite alternate;
+  }
+  @keyframes zoom{from{transform:scale(1)}to{transform:scale(1.08)}}
+  .hero .velo{
+    position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(38,50,35,.88) 0%,rgba(38,50,35,.45) 45%,rgba(38,50,35,.08) 75%);
+  }
+  .hero .contenido{
+    position:relative;z-index:2;width:100%;max-width:1080px;margin:0 auto;
+    padding:120px 20px 44px;color:#fff;
+  }
+  .hero .sello{
+    display:inline-block;border:1px solid rgba(255,255,255,.65);color:#fff;
+    font-size:12px;letter-spacing:3px;text-transform:uppercase;
+    padding:6px 14px;border-radius:999px;margin-bottom:16px;
+  }
+  .hero h1{font-size:52px;line-height:1.05;margin-bottom:8px}
+  .hero .sub{font-size:20px;color:#f3ead9;max-width:520px;margin-bottom:6px}
+  .hero .tray{font-size:16px;color:rgba(255,255,255,.85);margin-bottom:26px}
+  .btn-wa{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--wa);color:#fff;font-weight:700;font-size:18px;
+    padding:16px 28px;border-radius:999px;
+    box-shadow:0 8px 24px rgba(0,0,0,.35);
+  }
+  .btn-wa:active{background:var(--wa-osc)}
+  .hero .nota{margin-top:14px;font-size:14px;color:rgba(255,255,255,.8)}
+
+  /* ---------- Secciones ---------- */
+  section{padding:56px 20px}
+  .wrap{max-width:1080px;margin:0 auto}
+  .kicker{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--dorado);margin-bottom:8px}
+  h2{font-size:32px;color:var(--verde-osc);line-height:1.2;margin-bottom:14px}
+  .lead{font-size:18px;max-width:640px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .chip{
+    background:var(--verde-claro);border:1px solid var(--arena);color:var(--verde-osc);
+    border-radius:999px;padding:8px 16px;font-size:15px;font-weight:600;
+  }
+  .foto-redonda{border-radius:18px;overflow:hidden;margin-top:26px;box-shadow:0 10px 30px rgba(62,79,58,.18)}
+
+  /* ---------- Clases ---------- */
+  .fondo-verde{background:var(--verde-claro)}
+  .grid{display:grid;gap:18px;margin-top:26px}
+  .card{
+    background:#fff;border:1px solid var(--arena);border-radius:18px;
+    padding:26px 22px;box-shadow:0 4px 16px rgba(62,79,58,.06);
+  }
+  .card .ico{font-size:30px;margin-bottom:10px}
+  .card h3{font-family:Georgia,serif;font-weight:500;font-size:22px;color:var(--verde-osc);margin-bottom:8px}
+  .card p{font-size:16px}
+  .card img{border-radius:12px;margin-bottom:16px;width:100%;height:210px;object-fit:cover}
+
+  /* ---------- Pasos ---------- */
+  .pasos{display:grid;gap:16px;margin-top:26px;counter-reset:paso}
+  .paso{
+    background:#fff;border:1px solid var(--arena);border-radius:18px;
+    padding:22px;display:flex;gap:16px;align-items:flex-start;
+  }
+  .paso .num{
+    flex:0 0 44px;width:44px;height:44px;border-radius:50%;
+    background:var(--verde);color:#fff;font-family:Georgia,serif;font-size:21px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .paso h3{font-size:18px;color:var(--verde-osc);margin-bottom:4px}
+  .paso p{font-size:16px}
+  .centro{text-align:center}
+  .centro .btn-wa{margin-top:28px}
+
+  /* ---------- Contacto ---------- */
+  .contacto-grid{display:grid;gap:18px;margin-top:24px}
+  .dato{background:#fff;border:1px solid var(--arena);border-radius:18px;padding:22px}
+  .dato .etq{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--dorado);margin-bottom:6px}
+  .dato .val{font-size:19px;color:var(--verde-osc);font-weight:600}
+  .dato a{color:var(--verde);font-weight:600}
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:var(--verde-osc);color:rgba(255,255,255,.85);
+    padding:34px 20px 110px;text-align:center;font-size:14px;
+  }
+  footer .f-nombre{font-family:Georgia,serif;font-size:20px;color:#fff;margin-bottom:6px}
+  footer .demo{margin-top:16px;font-size:12.5px;color:rgba(255,255,255,.55)}
+
+  /* ---------- Botón flotante ---------- */
+  .flotante{
+    position:fixed;right:18px;bottom:18px;z-index:60;
+    width:62px;height:62px;border-radius:50%;
+    background:var(--wa);display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 24px rgba(0,0,0,.3);
+  }
+  .flotante svg{width:32px;height:32px;fill:#fff}
+  .btn-wa svg{width:22px;height:22px;fill:#fff;flex:0 0 22px}
+
+  @media(min-width:760px){
+    .hero h1{font-size:68px}
+    h2{font-size:38px}
+    .grid{grid-template-columns:repeat(3,1fr)}
+    .pasos{grid-template-columns:repeat(3,1fr)}
+    .contacto-grid{grid-template-columns:repeat(3,1fr)}
+    .dos-col{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center}
+    .dos-col .foto-redonda{margin-top:0}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-in">
+    <a class="brand" href="#inicio" aria-label="EG Pilates">
+      <span class="monograma">EG</span>
+      <span>
+        <span class="nombre">EG Pilates</span><br>
+        <span class="bajada">Pilates Reformer</span>
+      </span>
+    </a>
+    <a class="btn-wa-head" href="https://wa.me/5492235626030?text=Hola%2C%20quiero%20reservar%20mi%20lugar%20en%20EG%20Pilates.%20%C2%BFMe%20cuentan%20los%20cupos%20disponibles%3F" target="_blank" rel="noopener">Reservar</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero" id="inicio">
+  <img class="fondo" src="hero-estudio.jpg" alt="Interior del estudio EG Pilates con camas reformer">
+  <div class="velo"></div>
+  <div class="contenido">
+    <span class="sello">Cupos reducidos · Asegurá tu lugar</span>
+    <h1>EG Pilates</h1>
+    <p class="sub">Pilates Reformer en Mar del Plata: movimiento, fuerza y bienestar en un espacio pensado para vos.</p>
+    <p class="tray">18 años de trayectoria acompañando a nuestra comunidad.</p>
+    <a class="btn-wa" href="https://wa.me/5492235626030?text=Hola%2C%20quiero%20reservar%20mi%20lugar%20en%20EG%20Pilates.%20%C2%BFMe%20cuentan%20los%20cupos%20disponibles%3F" target="_blank" rel="noopener">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.6.8 5.1 2.4 7.2L4 29l7.1-2.3c1.5.8 3.2 1.2 4.9 1.2 6.6 0 12-5.3 12-11.9S22.6 3 16 3zm0 21.7c-1.5 0-3-.4-4.3-1.2l-.3-.2-4.2 1.4 1.4-4-.2-.3a9.7 9.7 0 0 1-1.5-5.3C6.9 9.8 11 5.8 16 5.8S25.1 9.8 25.1 15 21 24.7 16 24.7zm5.3-7.2c-.3-.1-1.7-.8-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.1-.2.1-.3.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.7-1.5.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.2-.2-.5-.3z"/></svg>
+      Reservar mi lugar
+    </a>
+    <p class="nota">Trabajamos con grupos reducidos: cada lugar se asegura por WhatsApp.</p>
+  </div>
+</div>
+
+<!-- EL ESTUDIO -->
+<section id="estudio">
+  <div class="wrap dos-col">
+    <div>
+      <p class="kicker">El estudio</p>
+      <h2>18 años moviéndose con Mar del Plata</h2>
+      <p class="lead">Desde 2007, EG Pilates es un espacio de confianza para entrenar con calma y con seguimiento de verdad. Acá cada clase es en grupos reducidos, con atención personalizada y el equipo completo de Pilates Reformer para trabajar fuerza, postura, flexibilidad y respiración a tu ritmo.</p>
+      <div class="chips">
+        <span class="chip">🗓️ 18 años de trayectoria</span>
+        <span class="chip">⭐ 4,7 en Google</span>
+        <span class="chip">👥 Grupos reducidos</span>
+        <span class="chip">📍 Balcarce 2864</span>
+      </div>
+    </div>
+    <div class="foto-redonda">
+      <img src="clase-reformer.jpg" alt="Clase personalizada de Pilates Reformer">
+    </div>
+  </div>
+</section>
+
+<!-- CLASES -->
+<section class="fondo-verde" id="clases">
+  <div class="wrap">
+    <p class="kicker">Nuestras clases</p>
+    <h2>Modalidades para cada cuerpo y cada momento</h2>
+    <p class="lead">Sin vueltas: elegí tu modalidad y reservá tu cupo. Los valores y horarios vigentes se consultan por WhatsApp.</p>
+    <div class="grid">
+      <article class="card">
+        <img src="detalle-equipo.jpg" alt="Detalle de una cama de Pilates Reformer">
+        <h3>Pilates Reformer</h3>
+        <p>Nuestra modalidad central. La cama reformer permite trabajar todo el cuerpo con resistencia progresiva: fuerza, centro, postura y movilidad, con bajo impacto para las articulaciones.</p>
+      </article>
+      <article class="card">
+        <div class="ico">👥</div>
+        <h3>Grupos reducidos</h3>
+        <p>Cupos limitados en cada horario para que la mirada del instructor esté en cada alumna y alumno: corrección, progresión y un plan que se adapta a vos, clase a clase.</p>
+      </article>
+      <article class="card">
+        <div class="ico">🔄</div>
+        <h3>Circuito con máquinas</h3>
+        <p>Circuito aeróbico y funcional con máquinas para complementar el trabajo del reformer: variedad, ritmo y un entrenamiento completo en una misma visita al estudio.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO RESERVAR -->
+<section id="reservar">
+  <div class="wrap">
+    <p class="kicker">Reservas</p>
+    <h2>Cómo reservar tu cupo</h2>
+    <div class="pasos">
+      <div class="paso">
+        <span class="num">1</span>
+        <div>
+          <h3>Mirá las clases</h3>
+          <p>Conocé las modalidades y pensá qué días y horarios te quedan bien.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <span class="num">2</span>
+        <div>
+          <h3>Escribinos por WhatsApp</h3>
+          <p>Tocá el botón y contanos qué estás buscando: te respondemos con los cupos disponibles.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <span class="num">3</span>
+        <div>
+          <h3>Asegurá tu lugar</h3>
+          <p>Coordinamos día y horario, y tu lugar queda reservado. ¡Te esperamos en el estudio!</p>
+        </div>
+      </div>
+    </div>
+    <div class="centro">
+      <a class="btn-wa" href="https://wa.me/5492235626030?text=Hola%2C%20quiero%20reservar%20mi%20lugar%20en%20EG%20Pilates.%20%C2%BFMe%20cuentan%20los%20cupos%20disponibles%3F" target="_blank" rel="noopener">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.6.8 5.1 2.4 7.2L4 29l7.1-2.3c1.5.8 3.2 1.2 4.9 1.2 6.6 0 12-5.3 12-11.9S22.6 3 16 3zm0 21.7c-1.5 0-3-.4-4.3-1.2l-.3-.2-4.2 1.4 1.4-4-.2-.3a9.7 9.7 0 0 1-1.5-5.3C6.9 9.8 11 5.8 16 5.8S25.1 9.8 25.1 15 21 24.7 16 24.7zm5.3-7.2c-.3-.1-1.7-.8-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.1-.2.1-.3.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.7-1.5.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.2-.2-.5-.3z"/></svg>
+        Reservar mi lugar por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="fondo-verde" id="contacto">
+  <div class="wrap">
+    <p class="kicker">Dónde estamos</p>
+    <h2>Visitanos en el estudio</h2>
+    <div class="contacto-grid">
+      <div class="dato">
+        <p class="etq">Dirección</p>
+        <p class="val">Balcarce 2864</p>
+        <p>Mar del Plata, Buenos Aires</p>
+      </div>
+      <div class="dato">
+        <p class="etq">Instagram</p>
+        <p class="val"><a href="https://www.instagram.com/egpilates" target="_blank" rel="noopener">@egpilates</a></p>
+        <p>Seguinos para novedades y cupos disponibles.</p>
+      </div>
+      <div class="dato">
+        <p class="etq">Horarios y cupos</p>
+        <p class="val">A consultar</p>
+        <p>Escribinos por WhatsApp y te pasamos días, horarios y lugares disponibles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="f-nombre">EG Pilates</p>
+  <p>Pilates Reformer · Grupos reducidos · Mar del Plata</p>
+  <p class="demo">Página de demostración creada por Gaude IA · Las fotos son ilustrativas; al contratar se reemplazan por el material real del estudio.</p>
+</footer>
+
+<!-- Botón flotante de WhatsApp -->
+<a class="flotante" href="https://wa.me/5492235626030?text=Hola%2C%20quiero%20reservar%20mi%20lugar%20en%20EG%20Pilates.%20%C2%BFMe%20cuentan%20los%20cupos%20disponibles%3F" target="_blank" rel="noopener" aria-label="Reservar por WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.6.8 5.1 2.4 7.2L4 29l7.1-2.3c1.5.8 3.2 1.2 4.9 1.2 6.6 0 12-5.3 12-11.9S22.6 3 16 3zm0 21.7c-1.5 0-3-.4-4.3-1.2l-.3-.2-4.2 1.4 1.4-4-.2-.3a9.7 9.7 0 0 1-1.5-5.3C6.9 9.8 11 5.8 16 5.8S25.1 9.8 25.1 15 21 24.7 16 24.7zm5.3-7.2c-.3-.1-1.7-.8-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.1-.2.1-.3.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.7-1.5.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.2-.2-.5-.3z"/></svg>
+</a>
+
+</body>
+</html>
