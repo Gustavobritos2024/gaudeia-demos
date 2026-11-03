@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lo de Tata — Cantina de mar en Mar del Plata</title>
+<meta name="description" content="Lo de Tata · Cantina de mar en Mar del Plata: pesca del día, mariscos, pastas caseras y los clásicos de cantina, en La Rioja 3098. Reservá tu mesa por WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#14333D; --navy-deep:#0C242D;
+    --red:#B23A2E; --red-soft:#D98B7E;
+    --gold:#B98A2F; --gold-soft:#D9BE94;
+    --cream:#FAF3E7; --paper:#FFFDF8; --ink:#2E2A25; --muted:#7A6E60;
+    --line:#EADBC4; --enter:cubic-bezier(0.22,1,0.36,1);
+    --wa:#25D366;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--cream); color:var(--ink); font-family:'Jost',system-ui,sans-serif; font-weight:300; line-height:1.65; overflow-x:hidden}
+  h1,h2,h3,.display{font-family:'Fraunces',Georgia,serif; font-weight:600; line-height:1.15}
+  img{display:block; max-width:100%}
+  a{touch-action:manipulation}
+  :focus-visible{outline:2px solid var(--gold); outline-offset:3px; border-radius:4px}
+  ::selection{background:var(--red); color:#fff}
+
+  /* ---------- Navegación ---------- */
+  .nav{position:fixed; inset:0 0 auto 0; z-index:60; display:flex; align-items:center; justify-content:space-between;
+    padding:12px clamp(18px,4vw,44px); background:rgba(250,243,231,.88); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(234,219,196,.8)}
+  .brand{display:flex; align-items:center; gap:11px; text-decoration:none; color:var(--navy)}
+  .brand svg{flex:none}
+  .brand .bname{font-family:'Fraunces',serif; font-size:1.5rem; font-weight:700; letter-spacing:.01em; line-height:1}
+  .brand .bsub{display:block; font-family:'Jost',sans-serif; font-size:.6rem; font-weight:500; letter-spacing:.34em; text-transform:uppercase; color:var(--red); margin-top:3px}
+  .nav-links{display:flex; gap:clamp(14px,3vw,34px); align-items:center}
+  .nav-links a{color:var(--ink); text-decoration:none; font-size:.86rem; letter-spacing:.14em; text-transform:uppercase; font-weight:400}
+  .nav-links a:hover{color:var(--red)}
+  .nav-links a.btn-nav{background:var(--red); color:#fff; padding:9px 18px; border-radius:999px; letter-spacing:.08em}
+  .nav-links a.btn-nav:hover{background:var(--navy); color:#fff}
+  @media (max-width:640px){ .nav-links a:not(.btn-nav){display:none} }
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative; min-height:100svh; display:flex; align-items:flex-end; overflow:hidden}
+  .hero-bg{position:absolute; inset:0; overflow:hidden}
+  .hero-bg img{width:100%; height:100%; object-fit:cover; animation:kenburns 26s ease-in-out infinite alternate}
+  @keyframes kenburns{from{transform:scale(1) translateY(0)} to{transform:scale(1.14) translateY(-1.5%)}}
+  .hero-shade{position:absolute; inset:0; background:linear-gradient(180deg, rgba(12,36,45,.34) 0%, rgba(12,36,45,0) 34%, rgba(12,36,45,.30) 66%, rgba(9,28,36,.85) 100%)}
+  .hero-content{position:relative; z-index:2; width:100%; max-width:1100px; margin:0 auto; padding:130px clamp(20px,5vw,48px) clamp(56px,9vh,96px); color:#FBF3E4; text-align:left}
+  .hero-eyebrow{letter-spacing:.34em; text-transform:uppercase; font-size:.78rem; font-weight:500; color:var(--gold-soft); margin-bottom:14px}
+  .hero h1{font-size:clamp(3.6rem,12vw,7.2rem); font-weight:700; letter-spacing:.01em; text-shadow:0 2px 30px rgba(0,0,0,.35)}
+  .hero h1 em{font-style:italic; font-weight:500; color:var(--gold-soft)}
+  .hero p.lead{max-width:540px; font-size:clamp(1.05rem,2.4vw,1.3rem); font-weight:300; margin:16px 0 30px; color:#F7EDD8}
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap}
+  .btn{display:inline-flex; align-items:center; gap:10px; text-decoration:none; font-weight:500; letter-spacing:.06em;
+    padding:15px 30px; border-radius:999px; font-size:1rem; transition:transform .35s var(--enter), background .3s, box-shadow .3s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-wa{background:var(--wa); color:#10331C; box-shadow:0 12px 30px rgba(18,140,70,.35)}
+  .btn-wa:hover{background:#3be07a}
+  .btn-ghost{background:rgba(251,243,228,.14); color:#FBF3E4; border:1px solid rgba(251,243,228,.55); backdrop-filter:blur(4px)}
+  .btn-ghost:hover{background:rgba(251,243,228,.26)}
+  .hero-scroll{position:absolute; right:clamp(18px,4vw,44px); bottom:26px; z-index:2; color:rgba(251,243,228,.75); font-size:.72rem; letter-spacing:.3em; text-transform:uppercase; writing-mode:vertical-rl; animation:bob 2.6s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)}}
+
+  /* ---------- Tira de datos ---------- */
+  .strip{background:var(--navy); color:#F3E8D2}
+  .strip .wrap{display:flex; flex-wrap:wrap; gap:10px 34px; justify-content:center; padding-top:20px; padding-bottom:20px; text-align:center}
+  .strip p{font-size:.94rem; letter-spacing:.1em; text-transform:uppercase; font-weight:400}
+  .strip p b{color:var(--gold-soft); font-weight:600}
+
+  /* ---------- Secciones ---------- */
+  section{padding:clamp(64px,10vh,110px) clamp(20px,5vw,48px)}
+  .wrap{max-width:1100px; margin:0 auto}
+  .eyebrow{letter-spacing:.32em; text-transform:uppercase; font-size:.74rem; font-weight:500; color:var(--red); margin-bottom:12px}
+  h2{font-size:clamp(2rem,5.4vw,3.1rem); margin-bottom:16px; color:var(--navy)}
+  h2 em{font-style:italic; color:var(--red)}
+  .section-lead{max-width:620px; color:var(--muted); font-size:1.06rem}
+
+  .reveal{opacity:0; transform:translateY(34px); transition:opacity .9s var(--enter), transform .9s var(--enter)}
+  .reveal.in{opacity:1; transform:none}
+  .reveal.d1{transition-delay:.12s} .reveal.d2{transition-delay:.24s} .reveal.d3{transition-delay:.36s}
+  @media (prefers-reduced-motion: reduce){
+    .hero-bg img,.hero-scroll{animation:none}
+    .reveal{opacity:1; transform:none; transition:none}
+    html{scroll-behavior:auto}
+  }
+
+  /* La casa */
+  .about{display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,5vw,64px); align-items:center}
+  @media (max-width:820px){ .about{grid-template-columns:1fr} }
+  .about-img{position:relative}
+  .about-img img{border-radius:18px; width:100%; height:520px; object-fit:cover; box-shadow:0 30px 60px rgba(46,42,37,.25)}
+  .about-img::after{content:""; position:absolute; inset:-14px 14px 14px -14px; border:1px solid var(--gold-soft); border-radius:18px; z-index:-1}
+  .about-points{margin-top:26px; display:grid; gap:14px}
+  .about-points li{list-style:none; display:flex; gap:12px; align-items:flex-start; color:var(--muted)}
+  .about-points li b{color:var(--ink); font-weight:500}
+  .owner-note{margin-top:22px; padding:4px 0 4px 16px; border-left:2px solid var(--red); color:var(--ink); font-size:1.04rem}
+  .owner-note b{font-weight:600}
+  .dot{flex:none; width:9px; height:9px; margin-top:9px; border-radius:50%; background:var(--red)}
+
+  /* La carta */
+  .menu-sec{background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+  .menu-photo{margin-top:40px; border-radius:18px; overflow:hidden; box-shadow:0 24px 50px rgba(46,42,37,.18)}
+  .menu-photo img{width:100%; height:clamp(240px,44vw,420px); object-fit:cover}
+  .menu-grid{display:grid; grid-template-columns:1fr 1fr; gap:clamp(26px,4vw,54px); margin-top:48px}
+  @media (max-width:820px){ .menu-grid{grid-template-columns:1fr} }
+  .menu-cat h3{font-size:1.55rem; color:var(--navy); padding-bottom:10px; border-bottom:2px solid var(--gold-soft); margin-bottom:16px}
+  .menu-cat h3 span{color:var(--red)}
+  .dish{display:flex; gap:10px; padding:9px 0; border-bottom:1px dotted var(--line)}
+  .dish:last-child{border-bottom:none}
+  .dish .dname{font-weight:500; color:var(--ink); font-size:1.02rem}
+  .dish .ddesc{display:block; font-weight:300; color:var(--muted); font-size:.92rem}
+  .menu-note{margin-top:36px; background:var(--cream); border:1px solid var(--line); border-radius:16px; padding:22px 26px; display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:space-between}
+  .menu-note p{max-width:560px; color:var(--muted)}
+  .menu-note p b{color:var(--ink); font-weight:500}
+  .btn-red{background:var(--red); color:#fff; box-shadow:0 12px 26px rgba(178,58,46,.3)}
+  .btn-red:hover{background:var(--navy)}
+
+  /* Cómo reservar */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(18px,3vw,30px); margin-top:44px}
+  @media (max-width:820px){ .steps{grid-template-columns:1fr} }
+  .step{background:var(--paper); border:1px solid var(--line); border-radius:20px; padding:30px 26px; position:relative}
+  .step .num{font-family:'Fraunces',serif; font-size:2.6rem; font-weight:700; color:var(--gold-soft); line-height:1}
+  .step h3{font-size:1.35rem; margin:10px 0 8px; color:var(--navy)}
+  .step p{color:var(--muted); font-size:.98rem}
+  .steps-note{margin-top:26px; text-align:center; color:var(--muted); font-size:1.02rem}
+  .steps-note b{color:var(--red); font-weight:500}
+
+  /* Contacto */
+  .contact-sec{background:var(--navy-deep); color:#F3E8D2}
+  .contact-sec h2{color:#FBF3E4}
+  .contact-sec h2 em{color:var(--gold-soft)}
+  .contact-sec .eyebrow{color:var(--gold-soft)}
+  .contact-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(18px,3vw,30px); margin-top:40px}
+  @media (max-width:820px){ .contact-grid{grid-template-columns:1fr} }
+  .cbox{border:1px solid rgba(217,190,148,.35); border-radius:18px; padding:26px}
+  .cbox h3{font-size:1.25rem; margin-bottom:8px; color:var(--gold-soft)}
+  .cbox p{color:#E8DCC2; font-size:1rem}
+  .cbox a{color:#FBF3E4; font-weight:500; text-decoration:none; border-bottom:1px solid var(--gold-soft)}
+  .cbox a:hover{color:var(--gold-soft)}
+  .contact-cta{margin-top:38px; text-align:center}
+
+  /* Pie */
+  footer{padding:38px clamp(20px,5vw,48px) 110px; text-align:center; color:var(--muted); font-size:.9rem}
+  footer .fname{font-family:'Fraunces',serif; font-size:1.4rem; font-weight:700; color:var(--navy); display:block; margin-bottom:6px}
+  footer .demo-note{margin-top:14px; font-size:.82rem; color:#A4937D}
+
+  /* Botón flotante WhatsApp */
+  .wa-float{position:fixed; right:20px; bottom:20px; z-index:70; width:60px; height:60px; border-radius:50%;
+    background:var(--wa); display:flex; align-items:center; justify-content:center; text-decoration:none;
+    box-shadow:0 14px 34px rgba(18,140,70,.45); transition:transform .3s var(--enter)}
+  .wa-float:hover{transform:translateY(-3px) scale(1.04)}
+  .wa-float svg{width:31px; height:31px; fill:#fff}
+</style>
+</head>
+<body>
+
+<!-- Navegación -->
+<header class="nav">
+  <a class="brand" href="#" aria-label="Lo de Tata — inicio">
+    <svg width="40" height="30" viewBox="0 0 48 34" fill="none" stroke="#B98A2F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M14 17 C 22 6, 36 4, 45 15 C 46 16, 46 18, 45 19 C 36 30, 22 28, 14 17 Z"/>
+      <path d="M15 17 C 10 12, 6 7, 4 3 C 9 5, 13 9, 16 13"/>
+      <path d="M15 17 C 10 22, 6 27, 4 31 C 9 29, 13 25, 16 21"/>
+      <circle cx="38" cy="13" r="1.8" fill="#B98A2F" stroke="none"/>
+    </svg>
+    <span><span class="bname">Lo de Tata</span><span class="bsub">Cantina de mar</span></span>
+  </a>
+  <nav class="nav-links">
+    <a href="#la-casa">La casa</a>
+    <a href="#la-carta">La carta</a>
+    <a href="#reservas">Reservas</a>
+    <a class="btn-nav" href="https://wa.me/5492236995511?text=Hola%2C%20quiero%20reservar%20una%20mesa%20en%20Lo%20de%20Tata" target="_blank" rel="noopener">Reservar</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero" style="padding:0">
+  <div class="hero-bg"><img src="hero.jpg" alt="Interior cálido de la cantina, con manteles a cuadros rojos y blancos y decoración marinera"></div>
+  <div class="hero-shade"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Cantina de mar · Mar del Plata</p>
+    <h1>Lo de <em>Tata</em></h1>
+    <p class="lead">Quince años de cantina en la esquina de La Rioja y Avellaneda: la pesca del día, los platos generosos para compartir al medio y los mozos de oficio de siempre.</p>
+    <div class="hero-actions">
+      <a class="btn btn-wa" href="https://wa.me/5492236995511?text=Hola%2C%20quiero%20reservar%20una%20mesa%20en%20Lo%20de%20Tata" target="_blank" rel="noopener">Reservar por WhatsApp</a>
+      <a class="btn btn-ghost" href="#la-carta">Ver la carta</a>
+    </div>
+  </div>
+  <span class="hero-scroll">Bajá y tentate</span>
+</section>
+
+<!-- Tira de datos -->
+<div class="strip">
+  <div class="wrap">
+    <p><b>Lunes a sábado</b> · Mediodía y noche</p>
+    <p><b>Domingo</b> cerrado</p>
+    <p><b>La Rioja 3098</b> · Esq. Avellaneda</p>
+  </div>
+</div>
+
+<!-- La casa -->
+<section id="la-casa">
+  <div class="wrap about">
+    <div class="about-img reveal">
+      <img src="pastas.jpg" alt="Milanesa a la napolitana con sorrentinos de jamón y queso, el clásico de la casa">
+    </div>
+    <div class="reveal d1">
+      <p class="eyebrow">La casa</p>
+      <h2>Un homenaje al <em>Tata</em>, en cada plato</h2>
+      <p class="section-lead">Lo de Tata nació como homenaje de Lisandro Ciarlotti a su abuelo —el Tata— y se convirtió en un clásico de Mar del Plata: manteles a cuadros, ambientación marinera y una cocina de mar honesta, de cocciones simples que dejan hablar al producto.</p>
+      <ul class="about-points">
+        <li><span class="dot"></span><span><b>La pesca manda:</b> la pizarra cambia todos los días con lo que llegó del puerto.</span></li>
+        <li><span class="dot"></span><span><b>Para compartir:</b> porciones generosas, pensadas para poner al medio de la mesa.</span></li>
+        <li><span class="dot"></span><span><b>Mozos de oficio:</b> de los de antes, que conocen la carta y a los clientes.</span></li>
+        <li><span class="dot"></span><span><b>Reglas de la casa:</b> a las pastas con frutos de mar no se les pone queso. Y te recibimos con un vermú de cortesía.</span></li>
+      </ul>
+      <p class="owner-note">«Acá se come como en lo del abuelo: <b>abundante, fresco y sin vueltas</b>.»</p>
+    </div>
+  </div>
+</section>
+
+<!-- La carta -->
+<section id="la-carta" class="menu-sec">
+  <div class="wrap">
+    <p class="eyebrow reveal">La carta</p>
+    <h2 class="reveal">De la pizarra <em>a la mesa</em></h2>
+    <p class="section-lead reveal d1">Sin precios a la vista: la carta de la casa cambia con la pesca del día. Estos son los clásicos que la gente viene a buscar.</p>
+
+    <div class="menu-photo reveal">
+      <img src="mariscos.jpg" alt="Fuentón de mariscos y pesca del día a la plancha, para compartir">
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-cat reveal">
+        <h3>Para arrancar <span>·</span></h3>
+        <div class="dish"><div><span class="dname">Rabas</span><span class="ddesc">Doradas, con limón. Las de siempre, bien hechas.</span></div></div>
+        <div class="dish"><div><span class="dname">Langostinos sarteneados</span><span class="ddesc">Con huevo frito. El que sabe, los pide.</span></div></div>
+        <div class="dish"><div><span class="dname">Vieiras gratinadas</span><span class="ddesc">Un clásico de la casa.</span></div></div>
+        <div class="dish"><div><span class="dname">Tiraditos y menú de crudos</span><span class="ddesc">La pesca más fresca, sin cocción: carpaccio de langostinos y más.</span></div></div>
+        <div class="dish"><div><span class="dname">Boquerones con manteca en rulo</span><span class="ddesc">Para picar mientras llega lo demás.</span></div></div>
+        <div class="dish"><div><span class="dname">Tortilla babé</span><span class="ddesc">Jugosa, como tiene que ser.</span></div></div>
+      </div>
+
+      <div class="menu-cat reveal d1">
+        <h3>Del mar, al medio <span>·</span></h3>
+        <div class="dish"><div><span class="dname">Pesca del día a la plancha</span><span class="ddesc">La de la pizarra —besugo, abadejo, lenguado o pez limón— con papa al natural y espinaca salteada al ajo. Sin sal y sin salsa: el pescado manda.</span></div></div>
+        <div class="dish"><div><span class="dname">Fuentón de pesca del día</span><span class="ddesc">Entero, para compartir entre dos… o tres.</span></div></div>
+        <div class="dish"><div><span class="dname">Arroz con calamar y mejillón</span><span class="ddesc">De esos que se piden con los ojos cerrados.</span></div></div>
+        <div class="dish"><div><span class="dname">Langostinos de la casa</span><span class="ddesc">Enormes, como se los conoce en toda la ciudad.</span></div></div>
+      </div>
+
+      <div class="menu-cat reveal">
+        <h3>Pastas y clásicos <span>·</span></h3>
+        <div class="dish"><div><span class="dname">Milanesa a la napolitana con sorrentinos</span><span class="ddesc">La combinación emblema de Lo de Tata: receta familiar.</span></div></div>
+        <div class="dish"><div><span class="dname">Sorrentinos de jamón y queso</span><span class="ddesc">Caseros, con la salsa que elijas.</span></div></div>
+        <div class="dish"><div><span class="dname">Pastas caseras</span><span class="ddesc">Las de la tradición italiana del Tata. Y la regla se respeta: con frutos de mar, sin queso.</span></div></div>
+      </div>
+
+      <div class="menu-cat reveal d1">
+        <h3>Dulces y brindis <span>·</span></h3>
+        <div class="dish"><div><span class="dname">Flan de la nonna</span><span class="ddesc">Con dulce de leche. El cierre que corresponde.</span></div></div>
+        <div class="dish"><div><span class="dname">Don Pedro</span><span class="ddesc">Helado, whisky y nueces: el clásico de cantina.</span></div></div>
+        <div class="dish"><div><span class="dname">Panqueque de manzana</span><span class="ddesc">Y más dulces de la carta, según el día.</span></div></div>
+        <div class="dish"><div><span class="dname">Para brindar</span><span class="ddesc">Vermú de bienvenida, una carta de vinos amplia —también por copa— y gin Restinga con tónica.</span></div></div>
+      </div>
+    </div>
+
+    <div class="menu-note reveal">
+      <p><b>¿Qué llegó hoy del puerto?</b> La pesca cambia todos los días. Escribinos por WhatsApp y te contamos qué hay en la pizarra.</p>
+      <a class="btn btn-red" href="https://wa.me/5492236995511?text=Hola%2C%20%C2%BFme%20cuentan%20qu%C3%A9%20pesca%20lleg%C3%B3%20hoy%3F" target="_blank" rel="noopener">Preguntar por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- Cómo reservar -->
+<section id="reservas">
+  <div class="wrap">
+    <p class="eyebrow reveal">Reservas</p>
+    <h2 class="reveal">Reservar es <em>así de fácil</em></h2>
+    <p class="section-lead reveal d1">Un solo canal, sin vueltas: todas las reservas entran por el mismo WhatsApp.</p>
+    <div class="steps">
+      <div class="step reveal">
+        <span class="num">1</span>
+        <h3>Tocá el botón</h3>
+        <p>El botón verde de WhatsApp te lleva directo a nuestro número de reservas, sin buscar teléfonos por ningún lado.</p>
+      </div>
+      <div class="step reveal d1">
+        <span class="num">2</span>
+        <h3>Contanos lo básico</h3>
+        <p>Decinos qué día venís, a qué hora y cuántos son. Con eso alcanza.</p>
+      </div>
+      <div class="step reveal d2">
+        <span class="num">3</span>
+        <h3>Te confirmamos la mesa</h3>
+        <p>Te respondemos con la confirmación y listo: llegás y te sentás.</p>
+      </div>
+    </div>
+    <p class="steps-note reveal">Con reserva te asegurás la mesa… <b>y te ahorrás la fila de la puerta</b>.</p>
+  </div>
+</section>
+
+<!-- Contacto -->
+<section class="contact-sec" style="padding-top:clamp(64px,10vh,110px)">
+  <div class="wrap">
+    <p class="eyebrow reveal">Visitanos</p>
+    <h2 class="reveal">La esquina <em>de siempre</em></h2>
+    <div class="contact-grid">
+      <div class="cbox reveal">
+        <h3>Dónde estamos</h3>
+        <p>La Rioja 3098, esquina Avellaneda<br>Barrio Chauvín · Mar del Plata</p>
+      </div>
+      <div class="cbox reveal d1">
+        <h3>Horarios</h3>
+        <p>Lunes a sábado<br>Mediodía y noche<br>Domingo cerrado</p>
+      </div>
+      <div class="cbox reveal d2">
+        <h3>Seguinos</h3>
+        <p>Instagram: <a href="https://www.instagram.com/lodetata" target="_blank" rel="noopener">@lodetata</a><br>La pizarra del día, en nuestras historias.</p>
+      </div>
+    </div>
+    <div class="contact-cta reveal">
+      <a class="btn btn-wa" href="https://wa.me/5492236995511?text=Hola%2C%20quiero%20reservar%20una%20mesa%20en%20Lo%20de%20Tata" target="_blank" rel="noopener">Reservar por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- Pie -->
+<footer>
+  <span class="fname">Lo de Tata</span>
+  Cantina de mar · La Rioja 3098, Mar del Plata
+  <p class="demo-note">Página de demostración creada por Gaude IA · Imágenes ilustrativas: al contratar, la página se oficializa con el material del local.</p>
+</footer>
+
+<!-- Botón flotante de WhatsApp -->
+<a class="wa-float" href="https://wa.me/5492236995511?text=Hola%2C%20quiero%20reservar%20una%20mesa%20en%20Lo%20de%20Tata" target="_blank" rel="noopener" aria-label="Reservar por WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.4.7 4.6 2 6.5L4 29l7.7-2c1.3.7 2.8 1 4.3 1 6.6 0 12-5.4 12-12S22.6 3 16 3zm5.9 16.9c-.3.8-1.5 1.5-2.1 1.6-.5.1-1.2.2-3.9-.8-3.3-1.3-5.4-4.7-5.6-4.9-.1-.2-1.3-1.8-1.3-3.4s.8-2.4 1.1-2.7c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .7.5l.9 2.2c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.2.3-.1.5.1.2.6 1 1.3 1.6 1.1 1 2 1.2 2.2 1.4.2.1.4.1.5-.1l1.1-1.3c.2-.3.4-.2.7-.1l2.1 1c.3.2.5.3.6.4 0 .1 0 .7-.2 1.3z"/></svg>
+</a>
+
+<script>
+  // Aparición suave de las secciones al hacer scroll
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){ els.forEach(function(e){ e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, {threshold: 0.12});
+    els.forEach(function(e){ io.observe(e); });
+  })();
+</script>
+</body>
+</html>
