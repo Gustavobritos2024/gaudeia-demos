@@ -320,6 +320,52 @@
       .form-error.show { display: block; }
       .rsvp-deadline { text-align: center; color: var(--ink-soft); margin: 18px 0 0; font-size: 0.95rem; }
 
+      /* ---------- PASE DE INGRESO (QR) ---------- */
+      .pass-panel { max-width: 640px; margin: 30px auto 0; }
+      .pass-card {
+        background: var(--surface); border: 1px solid var(--gold-soft);
+        border-radius: 26px; box-shadow: var(--shadow);
+        padding: 34px 30px 30px; text-align: center;
+        position: relative; overflow: hidden;
+      }
+      .pass-card::before {
+        content: ""; position: absolute; inset: 10px;
+        border: 1px dashed var(--rose-soft); border-radius: 18px; pointer-events: none;
+      }
+      .pass-kicker {
+        margin: 0 0 2px; font-size: 0.78rem; font-weight: 600;
+        letter-spacing: 0.34em; text-transform: uppercase; color: var(--gold); text-indent: 0.34em;
+      }
+      .pass-event {
+        font-family: "Cormorant Garamond", serif; font-style: italic;
+        font-size: 1.25rem; color: var(--ink-soft); margin: 0;
+      }
+      .pass-name {
+        font-family: "Great Vibes", cursive; font-weight: 400;
+        font-size: clamp(2.4rem, 8vw, 3.2rem); line-height: 1.15;
+        color: var(--rose-deep); margin: 8px 0 4px;
+      }
+      .pass-meta { margin: 0 0 20px; color: var(--ink-soft); font-size: 0.98rem; }
+      .pass-meta strong { color: var(--ink); font-weight: 500; }
+      .pass-qr {
+        width: 214px; height: 214px; margin: 0 auto;
+        background: #fff; border: 1px solid var(--line); border-radius: 16px;
+        display: flex; align-items: center; justify-content: center;
+        padding: 12px;
+      }
+      .pass-qr img, .pass-qr canvas { display: block; }
+      .pass-qr-fallback {
+        color: #4a2b33; font-size: 0.95rem; line-height: 1.5; margin: 0; padding: 0 8px;
+      }
+      .pass-code {
+        margin: 16px 0 4px; font-size: 1.05rem; font-weight: 600;
+        letter-spacing: 0.22em; color: var(--ink);
+      }
+      .pass-note { margin: 0 auto 20px; max-width: 420px; color: var(--ink-soft); font-size: 0.94rem; }
+      .pass-actions { display: flex; justify-content: center; }
+      .btn-rose { background: var(--rose); color: #fff; box-shadow: 0 12px 28px rgba(147, 55, 79, 0.3); }
+      .btn-rose:hover { background: var(--rose-deep); }
+
       /* ---------- FOOTER ---------- */
       footer {
         text-align: center; padding: 54px 20px 46px;
@@ -564,7 +610,7 @@
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 6.2L21 9.3l-5 4.4 1.6 6.5L12 16.7l-5.6 3.5L8 13.7 3 9.3l6.6-1.1z"/></svg>
         </div>
         <h2>Confirmá tu asistencia</h2>
-        <p class="section-sub">Completá tus datos y la confirmación llega directo por WhatsApp a la familia.</p>
+        <p class="section-sub">Completá tus datos y la confirmación llega directo por WhatsApp a la familia. Al confirmar, recibís tu <strong>pase de ingreso con QR</strong> personalizado.</p>
 
         <form class="rsvp-card" id="rsvp-form" novalidate>
           <p class="form-error" id="form-error" role="alert"></p>
@@ -596,8 +642,19 @@
               <option value="6">6 o más</option>
             </select>
           </div>
+          <div class="field" id="field-menu">
+            <label for="f-menu">¿Necesitás un menú especial?</label>
+            <select id="f-menu" name="menu">
+              <option value="Sin restricción">No, como de todo</option>
+              <option value="Vegetariano">Vegetariano</option>
+              <option value="Vegano">Vegano</option>
+              <option value="Celíaco (sin TACC)">Celíaco / sin TACC</option>
+              <option value="Con alergias alimentarias">Tengo alergias alimentarias</option>
+              <option value="Otra indicación">Otra indicación (la detallo abajo)</option>
+            </select>
+          </div>
           <div class="field">
-            <label for="f-nota">Algo que debamos saber (alergias, menú especial…)</label>
+            <label for="f-nota">Detalles que debamos saber (qué alergia, otra indicación…)</label>
             <textarea id="f-nota" name="nota" placeholder="Opcional"></textarea>
           </div>
           <button class="btn btn-wa" type="submit">
@@ -606,6 +663,25 @@
           </button>
           <p class="rsvp-deadline">Te pedimos confirmar antes del <strong>28 de noviembre de 2026</strong>.</p>
         </form>
+
+        <!-- PASE DE INGRESO: aparece al confirmar la asistencia -->
+        <div class="pass-panel" id="pass-panel" hidden aria-live="polite">
+          <article class="pass-card">
+            <p class="pass-kicker">Pase de ingreso</p>
+            <p class="pass-event">Mis 15 años · Valentina</p>
+            <p class="pass-name" id="pass-name">Invitado/a</p>
+            <p class="pass-meta" id="pass-meta"></p>
+            <div class="pass-qr" id="pass-qr" role="img" aria-label="Código QR personal de ingreso a la fiesta"></div>
+            <p class="pass-code" id="pass-code"></p>
+            <p class="pass-note">Este es tu pase personal: mostralo en la puerta el día de la fiesta. Guardalo con una captura de pantalla o descargá el QR.</p>
+            <div class="pass-actions">
+              <button class="btn btn-rose" type="button" id="pass-download">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M6.5 10.5 12 16l5.5-5.5M4 20h16"/></svg>
+                Descargar mi QR
+              </button>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -616,6 +692,7 @@
       <p class="credit">Invitación digital de demostración · <strong>Gaude IA</strong></p>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script>
       (function () {
         "use strict";
@@ -706,21 +783,101 @@
         var form = document.getElementById("rsvp-form");
         var errorBox = document.getElementById("form-error");
         var fieldCantidad = document.getElementById("field-cantidad");
+        var fieldMenu = document.getElementById("field-menu");
         var radios = form.querySelectorAll('input[name="asiste"]');
         function syncCantidad() {
           var val = form.querySelector('input[name="asiste"]:checked').value;
           fieldCantidad.style.display = val === "no" ? "none" : "";
+          fieldMenu.style.display = val === "no" ? "none" : "";
         }
         for (var i = 0; i < radios.length; i++) {
           radios[i].addEventListener("change", syncCantidad);
         }
         syncCantidad();
 
+        /* ---------- Pase de ingreso con QR personal ---------- */
+        var passPanel = document.getElementById("pass-panel");
+        var passName = document.getElementById("pass-name");
+        var passMeta = document.getElementById("pass-meta");
+        var passQr = document.getElementById("pass-qr");
+        var passCode = document.getElementById("pass-code");
+
+        function guestCode(nombre, cantidad, menu) {
+          var seed = (nombre + "|" + cantidad + "|" + menu).toUpperCase();
+          var h = 5381;
+          for (var i = 0; i < seed.length; i++) {
+            h = ((h * 33) ^ seed.charCodeAt(i)) >>> 0;
+          }
+          var code = h.toString(36).toUpperCase();
+          while (code.length < 6) { code = "0" + code; }
+          return "VAL-" + code.slice(-6);
+        }
+
+        function showPass(nombre, cantidad, menu) {
+          var code = guestCode(nombre, cantidad, menu);
+          var payload = [
+            "PASE DE INGRESO — 15 años de Valentina",
+            "Invitado/a: " + nombre,
+            "Código: " + code,
+            "Personas: " + cantidad,
+            "Menú: " + menu,
+            "Sábado 12 de diciembre de 2026 · 21:00 hs",
+            "Hotel Costa Galana, Mar del Plata"
+          ].join("\n");
+          passName.textContent = nombre;
+          passMeta.innerHTML = "<strong>Sábado 12 · Diciembre · 2026 — 21:00 hs</strong><br />" +
+            "Hotel Costa Galana, Mar del Plata · " +
+            (cantidad === "1" ? "1 persona" : cantidad + " personas") +
+            "<br />Menú: " + menu;
+          passCode.textContent = code;
+          passQr.innerHTML = "";
+          if (typeof QRCode !== "undefined") {
+            new QRCode(passQr, {
+              text: payload,
+              width: 190,
+              height: 190,
+              colorDark: "#3a1a24",
+              colorLight: "#ffffff",
+              correctLevel: QRCode.CorrectLevel.M
+            });
+          } else {
+            var fb = document.createElement("p");
+            fb.className = "pass-qr-fallback";
+            fb.textContent = "Presentá este código en la puerta junto con tu nombre: " + code;
+            passQr.appendChild(fb);
+          }
+          passPanel.hidden = false;
+          setTimeout(function () {
+            passPanel.scrollIntoView({ behavior: "smooth", block: "center" });
+          }, 350);
+        }
+
+        document.getElementById("pass-download").addEventListener("click", function () {
+          var canvas = passQr.querySelector("canvas");
+          var img = passQr.querySelector("img");
+          var dataUrl = null;
+          if (canvas) {
+            try { dataUrl = canvas.toDataURL("image/png"); } catch (e) { dataUrl = null; }
+          }
+          if (!dataUrl && img && img.src) { dataUrl = img.src; }
+          if (dataUrl) {
+            var a = document.createElement("a");
+            a.href = dataUrl;
+            a.download = "pase-qr-valentina.png";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+          } else {
+            passPanel.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        });
+
         form.addEventListener("submit", function (ev) {
           ev.preventDefault();
           var nombre = document.getElementById("f-nombre").value.trim();
           var asiste = form.querySelector('input[name="asiste"]:checked').value;
           var cantidad = document.getElementById("f-cantidad").value;
+          var menu = document.getElementById("f-menu").value;
           var nota = document.getElementById("f-nota").value.trim();
           if (!nombre) {
             errorBox.textContent = "Escribí tu nombre y apellido para que la familia sepa quién confirma.";
@@ -733,7 +890,9 @@
           if (asiste === "si") {
             msg = "¡Hola! Soy " + nombre + ". Confirmo mi asistencia a los 15 de Valentina " +
                   "(sábado 12 de diciembre, Hotel Costa Galana). Somos " + cantidad +
-                  (cantidad === "1" ? " persona" : " personas") + " en total.";
+                  (cantidad === "1" ? " persona" : " personas") + " en total. " +
+                  "Menú: " + menu + ". " +
+                  "Mi código de pase de ingreso es " + guestCode(nombre, cantidad, menu) + ".";
           } else {
             msg = "¡Hola! Soy " + nombre + ". Lamentablemente no voy a poder ir a los 15 de Valentina. " +
                   "¡Gracias por la invitación y que sea una noche hermosa!";
@@ -741,6 +900,11 @@
           if (nota) { msg += " Nota: " + nota; }
           var url = "https://wa.me/5492234256086?text=" + encodeURIComponent(msg);
           window.open(url, "_blank", "noopener");
+          if (asiste === "si") {
+            showPass(nombre, cantidad, menu);
+          } else {
+            passPanel.hidden = true;
+          }
         });
       })();
     </script>
