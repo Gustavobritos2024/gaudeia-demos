@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asistente de Turnos — Gaude IA | Que ningún turno se te pise</title>
+<meta name="description" content="Propuesta general de Gaude IA: un asistente que atiende el WhatsApp de tu negocio, agenda sobre una sola agenda, ofrece solo horarios libres, confirma y manda recordatorios. Para peluquerías, estética, gimnasios, consultorios y todo negocio que viva de sus turnos.">
+<!--
+  ════════════════════════════════════════════════════════════════════
+  PROPUESTA GENERAL — ASISTENTE DE TURNOS · Gaude IA
+  Página comercial REUTILIZABLE: no lleva nombre de ningún negocio.
+  Sirve para cualquier empresa con turnos (peluquerías, estética,
+  gimnasios, consultorios, talleres). Primera destinataria: un salón,
+  pero el texto es general a propósito.
+  SIN PRECIOS a propósito: el valor se define con el primer caso real
+  (canales, cobertura y volumen). La página invita a escribir al
+  WhatsApp de Gaude IA: +54 9 223 502-2628 (wa.me/5492235022628).
+  Dirección visual: tinta verdosa profunda + menta señal + ámbar cálido
+  sobre papel — distinta de la demo de estética (crema/rosa) para no
+  repetir combinación dentro del mismo rubro de demos.
+  Firma de la página: la escena de las 23:47 (el cliente que escribe
+  de noche), la misma del video general del asistente.
+
+  ▸▸▸ VIDEO GENERAL — HUECO LISTO ◂◂◂
+  El video lo produce otro agente y cae en:
+    ~/workspace/entregas/gaude-ia/asistente-turnos/video-asistente-turnos-general.mp4
+  Cuando exista: copiarlo a esta misma carpeta (y a la carpeta espejo
+  de despliegue) y reemplazar el bloque «video-slot» de la sección
+  #video por:
+    <video controls preload="metadata" playsinline
+           src="video-asistente-turnos-general.mp4"></video>
+  (El push del conector es solo texto: el .mp4 se sube por la interfaz
+  web de GitHub, como los demás binarios de las demos.)
+  ════════════════════════════════════════════════════════════════════
+-->
+<style>
+  :root{
+    --oscuro:#0f201c;
+    --oscuro-2:#173029;
+    --oscuro-3:#1e3d33;
+    --cabecera:rgba(15,32,28,.95);
+    --menta:#17b978;
+    --menta-osc:#0e8f5c;
+    --menta-clara:#8fe3bd;
+    --ambar:#e9a13b;
+    --ambar-clara:#f6cd85;
+    --papel:#f8f4ea;
+    --seccion:#efe7d3;
+    --tinta:#22302a;
+    --gris:#5c6a62;
+    --linea:#ddd2ba;
+    --blanco:#fff;
+    --sobre-oscuro:rgba(255,255,255,.86);
+    --sobre-oscuro-suave:rgba(255,255,255,.6);
+    --wa:#25d366;
+    --wa-osc:#1eb856;
+    --sombra-card:0 4px 16px rgba(15,32,28,.08);
+    --sombra-boton:0 8px 24px rgba(0,0,0,.35);
+    --sombra-flotante:0 8px 24px rgba(0,0,0,.3);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;overflow-x:clip}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--papel);
+    color:var(--tinta);
+    line-height:1.6;
+    font-size:17px;
+    overflow-x:clip;
+  }
+  h1,h2,.serif{font-family:Georgia,"Times New Roman",serif;font-weight:500}
+  img,video{display:block;max-width:100%}
+  a{text-decoration:none}
+  a:focus-visible,.flotante:focus-visible{
+    outline:3px solid var(--ambar);
+    outline-offset:3px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:var(--cabecera);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--oscuro-3);
+  }
+  .header-in{
+    max-width:1080px;margin:0 auto;padding:10px 18px;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+  }
+  .brand{display:flex;align-items:center;gap:12px;color:var(--blanco)}
+  .brand .monograma{
+    width:46px;height:46px;flex:0 0 46px;border-radius:14px;
+    border:2px solid var(--menta);
+    display:flex;align-items:center;justify-content:center;
+    font-family:Georgia,serif;font-size:19px;color:var(--blanco);
+    background:var(--oscuro-2);
+  }
+  .brand .nombre{font-family:Georgia,serif;font-size:22px;line-height:1.05}
+  .brand .bajada{font-size:13px;color:var(--menta-clara)}
+  .btn-wa-head{
+    background:var(--wa);color:var(--blanco);font-weight:600;font-size:15px;
+    padding:10px 16px;border-radius:999px;white-space:nowrap;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;background:var(--oscuro);color:var(--blanco);
+    display:flex;align-items:center;
+  }
+  .hero .contenido{
+    position:relative;z-index:2;width:100%;max-width:1080px;margin:0 auto;
+    padding:64px 20px 56px;
+  }
+  .etiqueta{
+    display:flex;align-items:center;gap:10px;
+    font-size:15px;font-weight:600;color:var(--menta-osc);margin-bottom:10px;
+  }
+  .etiqueta::before{
+    content:"";width:26px;height:2px;background:var(--menta);flex:0 0 26px;
+  }
+  .etiqueta-centro{justify-content:center}
+  .etiqueta-clara{color:var(--ambar-clara)}
+  .etiqueta-clara::before{background:var(--ambar)}
+  .hero h1{font-size:46px;line-height:1.06;margin-bottom:12px;max-width:640px}
+  .hero h1 .marca{color:var(--menta-clara)}
+  .hero .sub{font-size:20px;color:var(--sobre-oscuro);max-width:520px;margin-bottom:28px}
+  .btn-wa{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--wa);color:var(--blanco);font-weight:700;font-size:18px;
+    padding:16px 28px;border-radius:999px;
+    box-shadow:var(--sombra-boton);
+  }
+  .btn-wa:active{background:var(--wa-osc)}
+  .btn-wa svg{width:22px;height:22px;fill:var(--blanco);flex:0 0 22px}
+  /* Firma: la escena de las 23:47 */
+  .escena{
+    margin-top:40px;display:flex;flex-wrap:wrap;gap:16px;align-items:stretch;
+  }
+  .reloj{
+    background:var(--oscuro-2);border:1px solid var(--oscuro-3);border-radius:18px;
+    padding:20px 26px;display:flex;flex-direction:column;justify-content:center;
+  }
+  .reloj .hora{
+    font-family:Georgia,serif;font-size:52px;line-height:1;color:var(--ambar-clara);
+  }
+  .reloj .cuando{font-size:14px;color:var(--sobre-oscuro-suave);margin-top:6px}
+  .burbuja{
+    background:var(--oscuro-3);border:1px solid var(--menta-osc);border-radius:18px 18px 18px 4px;
+    padding:20px 24px;max-width:420px;display:flex;flex-direction:column;justify-content:center;
+  }
+  .burbuja .msg{font-size:19px;color:var(--blanco)}
+  .burbuja .resp{font-size:15px;color:var(--menta-clara);margin-top:8px}
+
+  /* ---------- Secciones ---------- */
+  section{padding:56px 20px}
+  .alt{background:var(--seccion)}
+  .oscura{background:var(--oscuro);color:var(--sobre-oscuro)}
+  .oscura h2{color:var(--blanco)}
+  .wrap{max-width:1080px;margin:0 auto}
+  h2{font-size:32px;color:var(--oscuro);line-height:1.2;margin-bottom:14px}
+  .lead{font-size:18px;max-width:640px}
+  .lead-centro{margin-left:auto;margin-right:auto}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .chip{
+    background:var(--blanco);border:1px solid var(--linea);color:var(--oscuro);
+    border-radius:999px;padding:8px 16px;font-size:15px;font-weight:600;
+  }
+
+  /* ---------- Tarjetas ---------- */
+  .grid{display:grid;gap:18px;margin-top:26px}
+  .card{
+    background:var(--blanco);border:1px solid var(--linea);border-radius:18px;
+    padding:26px 22px;box-shadow:var(--sombra-card);
+  }
+  .card .ico{margin-bottom:12px;color:var(--menta-osc)}
+  .card .ico.ambar{color:var(--ambar)}
+  .card .ico svg{width:34px;height:34px;display:block}
+  .card .rotulo{font-size:15px;font-weight:600;color:var(--menta-osc);margin-bottom:6px}
+  .card h3{font-family:Georgia,serif;font-weight:500;font-size:22px;color:var(--oscuro);margin-bottom:8px}
+  .card p{font-size:16px}
+
+  /* ---------- Video ---------- */
+  .video-slot{
+    margin-top:26px;border-radius:18px;overflow:hidden;background:var(--oscuro-2);
+    border:1px solid var(--oscuro-3);
+  }
+  .video-slot video{width:100%;height:auto}
+  .video-espera{
+    padding:52px 24px;text-align:center;color:var(--sobre-oscuro);
+  }
+  .video-espera .play{
+    width:72px;height:72px;margin:0 auto 16px;border-radius:50%;
+    border:2px solid var(--menta);color:var(--menta-clara);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .video-espera .play svg{width:30px;height:30px}
+  .video-espera .vt{font-family:Georgia,serif;font-size:22px;color:var(--blanco);margin-bottom:6px}
+  .video-espera p{font-size:15px;color:var(--sobre-oscuro-suave)}
+
+  /* ---------- Pasos ---------- */
+  .pasos{display:grid;gap:16px;margin-top:26px}
+  .paso{
+    background:var(--blanco);border:1px solid var(--linea);border-radius:18px;
+    padding:22px;display:flex;gap:16px;align-items:flex-start;
+  }
+  .oscura .paso{background:var(--oscuro-2);border-color:var(--oscuro-3)}
+  .paso .num{
+    flex:0 0 44px;width:44px;height:44px;border-radius:50%;
+    background:var(--menta);color:var(--blanco);font-family:Georgia,serif;font-size:21px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .paso .num.ambar{background:var(--ambar)}
+  .paso h3{font-size:18px;color:var(--oscuro);margin-bottom:4px}
+  .oscura .paso h3{color:var(--blanco)}
+  .paso p{font-size:16px}
+  .centro{text-align:center}
+  .centro .btn-wa{margin-top:28px}
+
+  /* ---------- Datos / FAQ / oferta ---------- */
+  .contacto-grid{display:grid;gap:18px;margin-top:24px}
+  .dato{background:var(--blanco);border:1px solid var(--linea);border-radius:18px;padding:22px}
+  .dato .rotulo{font-size:15px;font-weight:600;color:var(--menta-osc);margin-bottom:6px}
+  .dato .val{font-size:19px;color:var(--oscuro);font-weight:600}
+  .dato a{color:var(--menta-osc);font-weight:600}
+  .nota{
+    margin-top:22px;background:var(--blanco);border:1px solid var(--linea);
+    border-left:5px solid var(--ambar);border-radius:12px;padding:18px 20px;font-size:16px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:var(--oscuro);color:var(--sobre-oscuro);
+    padding:34px 20px 110px;text-align:center;font-size:14px;
+  }
+  footer .f-nombre{font-family:Georgia,serif;font-size:20px;color:var(--blanco);margin-bottom:6px}
+  footer .firma{margin-top:10px;color:var(--ambar-clara);font-size:14px}
+  footer .demo{margin-top:16px;font-size:12.5px;color:var(--sobre-oscuro-suave);max-width:640px;margin-left:auto;margin-right:auto}
+
+  /* ---------- Botón flotante ---------- */
+  .flotante{
+    position:fixed;right:18px;bottom:18px;z-index:60;
+    width:62px;height:62px;border-radius:50%;
+    background:var(--wa);display:flex;align-items:center;justify-content:center;
+    box-shadow:var(--sombra-flotante);
+  }
+  .flotante svg{width:32px;height:32px;fill:var(--blanco)}
+
+  @media(min-width:760px){
+    .hero h1{font-size:64px}
+    h2{font-size:38px}
+    .grid{grid-template-columns:repeat(3,1fr)}
+    .grid-dos{grid-template-columns:1fr 1fr}
+    .pasos{grid-template-columns:repeat(2,1fr)}
+    .pasos-cuatro{grid-template-columns:repeat(4,1fr)}
+    .pasos-cuatro .paso{flex-direction:column}
+    .contacto-grid{grid-template-columns:repeat(2,1fr)}
+  }
+</style>
+<!-- Schema.org — Propuesta general de Gaude IA: el servicio y su proveedor -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Asistente de Turnos — Gaude IA",
+  "serviceType": "Asistente conversacional para turnos por WhatsApp",
+  "description": "Asistente que atiende el WhatsApp del negocio, agenda sobre una sola agenda ofreciendo solo horarios libres, confirma cada turno y envía recordatorios. Para peluquerías, centros de estética, gimnasios, consultorios y todo negocio que trabaje con turnos.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Gaude IA",
+    "telephone": "+5492235022628",
+    "areaServed": {
+      "@type": "Country",
+      "name": "Argentina"
+    }
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Argentina"
+  },
+  "audience": {
+    "@type": "BusinessAudience",
+    "audienceType": "Negocios que trabajan con turnos: peluquerías, centros de estética, gimnasios, consultorios, talleres"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Tengo que cambiar mi número de WhatsApp?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. El asistente trabaja sobre el WhatsApp Business de tu negocio, por las vías oficiales de Meta: tu número y tu cuenta quedan como están, sin riesgos para la cuenta."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Atiende de noche y los fines de semana?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Depende de cómo lo armemos, y te lo decimos de frente: si el asistente vive en la computadora de tu negocio, atiende mientras la computadora está prendida. Para atender las 24 horas, todos los días, trabaja en la nube. Vos elegís la cobertura y el costo acompaña esa elección."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo evita que se pisen los turnos?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Porque hay una sola agenda: el asistente la consulta antes de ofrecer y solo ofrece los horarios que están libres. Dos clientes no pueden recibir el mismo horario."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué pasa si un cliente pide algo delicado?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El asistente deriva al dueño al instante: reclamos, temas de plata o de salud y todo lo que definamos juntos como delicado no lo responde el asistente, te lo pasa a vos."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto cuesta?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La estructura es simple: un armado único (relevamiento, carga de tu negocio y puesta en marcha con semana de prueba) y un cuidado mensual. El valor se define con tu caso, según los canales, la cobertura y el volumen de mensajes. Escribinos por WhatsApp y lo armamos juntos, sin compromiso."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header>
+  <div class="header-in">
+    <a class="brand" href="#">
+      <span class="monograma">G</span>
+      <span>
+        <span class="nombre">Gaude IA</span><br>
+        <span class="bajada">Asistente de Turnos</span>
+      </span>
+    </a>
+    <a class="btn-wa-head" href="https://wa.me/5492235022628?text=Hola%20Gaude%20IA%2C%20quiero%20info%20sobre%20el%20Asistente%20de%20Turnos%20para%20mi%20negocio." target="_blank" rel="noopener">Quiero info</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="contenido">
+    <p class="etiqueta etiqueta-clara">Asistente de Turnos · Gaude IA</p>
+    <h1>Que ningún turno <span class="marca">se te pise</span>, nunca más</h1>
+    <p class="sub">Un asistente atiende tu WhatsApp, agenda sobre una sola agenda y confirma cada turno. Vos trabajás; él ordena.</p>
+    <a class="btn-wa" href="https://wa.me/5492235022628?text=Hola%20Gaude%20IA%2C%20quiero%20info%20sobre%20el%20Asistente%20de%20Turnos%20para%20mi%20negocio." target="_blank" rel="noopener">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.6.8 5.1 2.4 7.2L4 29l7.1-2.3c1.5.8 3.2 1.2 4.9 1.2 6.6 0 12-5.3 12-11.9S22.6 3 16 3zm0 21.7c-1.5 0-3-.4-4.3-1.2l-.3-.2-4.2 1.4 1.4-4-.2-.3a9.7 9.7 0 0 1-1.5-5.3C6.9 9.8 11 5.8 16 5.8S25.1 9.8 25.1 15 21 24.7 16 24.7zm5.3-7.2c-.3-.1-1.7-.8-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.1-.2.1-.3.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.7-1.5.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.2-.2-.5-.3z"/></svg>
+      Quiero mi asistente
+    </a>
+    <div class="escena" aria-hidden="true">
+      <div class="reloj">
+        <span class="hora">23:47</span>
+        <span class="cuando">Tu negocio duerme. Tus clientes, no.</span>
+      </div>
+      <div class="burbuja">
+        <span class="msg">«¿Tenés un turno para mañana?»</span>
+        <span class="resp">El asistente responde al instante — y agenda.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EL PROBLEMA -->
+<section id="problema">
+  <div class="wrap">
+    <p class="etiqueta">El problema</p>
+    <h2>La agenda se desordena sola</h2>
+    <p class="lead">No es falta de clientes: es falta de manos. Esto pasa en casi todo negocio que vive de sus turnos:</p>
+    <div class="grid">
+      <div class="card">
+        <p class="ico ambar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8.5 15.5l7 4M15.5 15.5l-7 4"/></svg></p>
+        <h3>Turnos que se pisan</h3>
+        <p>Dos clientes en el mismo horario: uno espera, el otro se enoja, y el problema lo pagás vos.</p>
+      </div>
+      <div class="card">
+        <p class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></p>
+        <h3>Mensajes que esperan</h3>
+        <p>El WhatsApp suena mientras trabajás. Contestar horas después es perder el turno: el cliente ya reservó en otro lado.</p>
+      </div>
+      <div class="card">
+        <p class="ico ambar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2h-3"/><path d="M14 3v6h6"/><path d="M9 14l6 6M15 14l-6 6"/></svg></p>
+        <h3>Anotaciones sueltas</h3>
+        <p>Un poco en la agenda de papel, un poco en el celular, un poco de memoria: así se cruzan los horarios y se pierden clientes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO GENERAL -->
+<section id="video" class="oscura">
+  <div class="wrap">
+    <p class="etiqueta etiqueta-clara">En 30 segundos</p>
+    <h2>Así trabaja el asistente</h2>
+    <p class="lead">Un cliente escribe de noche; el asistente responde, mira la agenda y el turno queda confirmado. Miralo:</p>
+    <!-- ══════════════════════════════════════════════════════════════
+         VIDEO GENERAL — ACÁ VA EL <video>
+         Archivo esperado (lo produce otro agente):
+           video-asistente-turnos-general.mp4  (en esta misma carpeta)
+         Cuando el archivo exista, reemplazar TODO el bloque
+         .video-espera de abajo por:
+           <video controls preload="metadata" playsinline
+                  src="video-asistente-turnos-general.mp4"></video>
+         dentro del mismo contenedor .video-slot.
+         ══════════════════════════════════════════════════════════════ -->
+    <div class="video-slot">
+      <div class="video-espera">
+        <div class="play">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+        </div>
+        <p class="vt">El video está en producción</p>
+        <p>En breve vas a poder ver acá, en 30 segundos, cómo el asistente agenda sin pisar un solo turno.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section id="como-funciona">
+  <div class="wrap">
+    <p class="etiqueta">Cómo funciona</p>
+    <h2>Una sola agenda, cero choques</h2>
+    <p class="lead">El asistente vive en el WhatsApp de tu negocio y trabaja siempre sobre la misma agenda:</p>
+    <div class="pasos pasos-cuatro">
+      <div class="paso">
+        <span class="num">1</span>
+        <div>
+          <h3>Responde al instante</h3>
+          <p>El cliente escribe y el asistente contesta en el momento, con tus servicios, tus precios y tu tono.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <span class="num">2</span>
+        <div>
+          <h3>Mira la única agenda</h3>
+          <p>Antes de ofrecer, consulta la agenda del negocio. No hay otra: todo pasa por ahí.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <span class="num">3</span>
+        <div>
+          <h3>Ofrece solo lo libre</h3>
+          <p>Muestra únicamente los horarios disponibles. Si está ocupado, no lo ofrece: así no se pisa ningún turno.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <span class="num ambar">4</span>
+        <div>
+          <h3>Confirma y recuerda</h3>
+          <p>El turno queda agendado y el cliente recibe su recordatorio. Menos ausencias, menos huecos.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota">
+      <strong>¿Y lo delicado?</strong> Reclamos, temas de plata o de salud y todo lo que definamos juntos: el asistente no lo responde — te lo deriva a vos al instante.
+    </div>
+  </div>
+</section>
+
+<!-- QUÉ RESUELVE -->
+<section id="que-resuelve" class="alt">
+  <div class="wrap">
+    <p class="etiqueta">Qué resuelve</p>
+    <h2>Lo que cambia desde la primera semana</h2>
+    <div class="grid grid-dos">
+      <div class="card">
+        <p class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M9 15.5l2 2 4-4.5"/></svg></p>
+        <h3>Nunca más dos en el mismo turno</h3>
+        <p>Una sola agenda y horarios que solo se ofrecen si están libres: el choque de turnos desaparece.</p>
+      </div>
+      <div class="card">
+        <p class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-4.4-7.7L21 3l-.8 4.3c.5 1.4.8 3 .8 4.7z"/><path d="M8.5 11h7M8.5 14h4.5"/></svg></p>
+        <h3>Ningún mensaje queda esperando</h3>
+        <p>Respuesta inmediata a cualquier hora de atención: el cliente que escribe, reserva — no se va a la competencia.</p>
+      </div>
+      <div class="card">
+        <p class="ico ambar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 9a6 6 0 1 0-12 0c0 6-2.5 7-2.5 7h17S18 15 18 9"/><path d="M10 20a2.2 2.2 0 0 0 4 0"/></svg></p>
+        <h3>Recordatorios que cuidan tu agenda</h3>
+        <p>Cada turno se confirma y se recuerda solo. Menos plantones, menos horas muertas.</p>
+      </div>
+      <div class="card">
+        <p class="ico ambar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg></p>
+        <h3>Vos, a lo tuyo</h3>
+        <p>El teléfono deja de interrumpirte. El asistente atiende y agenda; vos atendés a tus clientes en persona.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COBERTURA HONESTA -->
+<section id="cobertura">
+  <div class="wrap">
+    <p class="etiqueta">Sin vueltas</p>
+    <h2>Dos formas de trabajar, vos elegís</h2>
+    <p class="lead">Te lo decimos de frente, antes de empezar:</p>
+    <div class="grid grid-dos">
+      <div class="card">
+        <h3>En tu computadora</h3>
+        <p>El asistente vive en la compu de tu negocio y atiende mientras está prendida. Ideal para cubrir tu horario de atención, sin costos de servidor.</p>
+      </div>
+      <div class="card">
+        <h3>En la nube, 24/7</h3>
+        <p>El asistente trabaja en la nube y atiende las 24 horas, todos los días — también a las 23:47. Es la cobertura completa y el costo acompaña esa elección.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RUBROS -->
+<section id="rubros" class="alt">
+  <div class="wrap">
+    <p class="etiqueta">Para quién es</p>
+    <h2>Si tu negocio vive de los turnos, es para vos</h2>
+    <div class="chips">
+      <span class="chip">Peluquerías y salones</span>
+      <span class="chip">Centros de estética</span>
+      <span class="chip">Gimnasios y pilates</span>
+      <span class="chip">Consultorios y salud</span>
+      <span class="chip">Barberías</span>
+      <span class="chip">Talleres y servicios</span>
+      <span class="chip">Veterinarias</span>
+      <span class="chip">Y todo negocio con agenda</span>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO EMPEZAMOS -->
+<section id="como-empezamos">
+  <div class="wrap">
+    <p class="etiqueta">Cómo empezamos</p>
+    <h2>De la charla a la agenda ordenada, en 4 pasos</h2>
+    <div class="pasos pasos-cuatro">
+      <div class="paso">
+        <span class="num">1</span>
+        <div>
+          <h3>Relevamiento</h3>
+          <p>Una charla de 30 a 40 minutos: tus servicios, precios, horarios, preguntas frecuentes, tu tono y qué deriva sí o sí a vos.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <span class="num">2</span>
+        <div>
+          <h3>Armado</h3>
+          <p>Cargamos tu negocio y las recetas del asistente: responder consultas, tomar turnos, confirmar, recordar y derivar lo delicado.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <span class="num">3</span>
+        <div>
+          <h3>Semana de prueba</h3>
+          <p>El asistente responde y vos mirás y corregís. Nada sale sin red los primeros días.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <span class="num ambar">4</span>
+        <div>
+          <h3>Memoria viva</h3>
+          <p>Cada corrección queda guardada: el asistente habla cada vez más parecido a tu negocio.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LA OFERTA -->
+<section id="oferta" class="alt">
+  <div class="wrap">
+    <p class="etiqueta">La oferta</p>
+    <h2>Simple: un armado y un cuidado</h2>
+    <div class="grid grid-dos">
+      <div class="card">
+        <p class="rotulo">Pago único</p>
+        <h3>El armado</h3>
+        <p>Relevamiento completo, carga de tu negocio, las recetas del asistente, puesta en marcha y la semana de prueba supervisada.</p>
+      </div>
+      <div class="card">
+        <p class="rotulo">Mensual</p>
+        <h3>El cuidado</h3>
+        <p>Correcciones y aprendizaje continuo, preguntas nuevas que aparecen, y un reporte simple de qué atendió tu asistente.</p>
+      </div>
+    </div>
+    <div class="nota">
+      <strong>¿Y el precio?</strong> Se define con tu caso: depende de los canales (solo WhatsApp, o también Instagram), la cobertura que elijas y el volumen de mensajes. Escribinos y lo armamos juntos, sin compromiso.
+    </div>
+    <div class="centro">
+      <a class="btn-wa" href="https://wa.me/5492235022628?text=Hola%20Gaude%20IA%2C%20quiero%20info%20sobre%20el%20Asistente%20de%20Turnos%20para%20mi%20negocio." target="_blank" rel="noopener">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.6.8 5.1 2.4 7.2L4 29l7.1-2.3c1.5.8 3.2 1.2 4.9 1.2 6.6 0 12-5.3 12-11.9S22.6 3 16 3zm0 21.7c-1.5 0-3-.4-4.3-1.2l-.3-.2-4.2 1.4 1.4-4-.2-.3a9.7 9.7 0 0 1-1.5-5.3C6.9 9.8 11 5.8 16 5.8S25.1 9.8 25.1 15 21 24.7 16 24.7zm5.3-7.2c-.3-.1-1.7-.8-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.1-.2.1-.3.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.7-1.5.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.2-.2-.5-.3z"/></svg>
+        Escribir a Gaude IA
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PREGUNTAS FRECUENTES -->
+<section id="faq">
+  <div class="wrap">
+    <p class="etiqueta">Preguntas frecuentes</p>
+    <h2>Lo que todos preguntan</h2>
+    <div class="contacto-grid">
+      <div class="dato">
+        <p class="val">¿Tengo que cambiar mi número?</p>
+        <p>No: trabaja sobre el WhatsApp Business de tu negocio, por las vías oficiales de Meta. Tu número y tu cuenta quedan como están.</p>
+      </div>
+      <div class="dato">
+        <p class="val">¿Atiende de noche?</p>
+        <p>Si vive en tu computadora, atiende mientras está prendida. En la nube, atiende las 24 horas. Vos elegís la cobertura.</p>
+      </div>
+      <div class="dato">
+        <p class="val">¿Cómo evita los turnos pisados?</p>
+        <p>Hay una sola agenda y el asistente solo ofrece los horarios que están libres. Dos clientes no pueden recibir el mismo horario.</p>
+      </div>
+      <div class="dato">
+        <p class="val">¿Y si piden algo delicado?</p>
+        <p>Te lo deriva a vos al instante: reclamos, plata, salud y todo lo que definamos juntos como delicado.</p>
+      </div>
+      <div class="dato">
+        <p class="val">¿Cómo sabe qué responder?</p>
+        <p>Se carga con tus servicios, precios, horarios y tu tono, y aprende de tus correcciones. La primera semana es de prueba supervisada.</p>
+      </div>
+      <div class="dato">
+        <p class="val">¿Cuánto cuesta?</p>
+        <p>Un armado único y un cuidado mensual; el valor sale de tu caso (canales, cobertura y volumen). Escribinos y lo vemos sin compromiso.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="contacto" class="oscura">
+  <div class="wrap centro">
+    <p class="etiqueta etiqueta-clara etiqueta-centro">Empezamos cuando quieras</p>
+    <h2>Tu agenda ordenada empieza con un mensaje</h2>
+    <p class="lead lead-centro">Contanos cómo trabaja tu negocio hoy y te mostramos cómo quedaría con el asistente. Sin compromiso.</p>
+    <a class="btn-wa" href="https://wa.me/5492235022628?text=Hola%20Gaude%20IA%2C%20quiero%20info%20sobre%20el%20Asistente%20de%20Turnos%20para%20mi%20negocio." target="_blank" rel="noopener">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.6.8 5.1 2.4 7.2L4 29l7.1-2.3c1.5.8 3.2 1.2 4.9 1.2 6.6 0 12-5.3 12-11.9S22.6 3 16 3zm0 21.7c-1.5 0-3-.4-4.3-1.2l-.3-.2-4.2 1.4 1.4-4-.2-.3a9.7 9.7 0 0 1-1.5-5.3C6.9 9.8 11 5.8 16 5.8S25.1 9.8 25.1 15 21 24.7 16 24.7zm5.3-7.2c-.3-.1-1.7-.8-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.1-.2.1-.3.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.7-1.5.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.2-.2-.5-.3z"/></svg>
+      Hablar con Gaude IA
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p class="f-nombre">Gaude IA — Asistente de Turnos</p>
+  <p>Atención y agenda inteligente para negocios que trabajan con turnos.</p>
+  <p class="firma">Desde Mar del Plata, para todo el país.</p>
+  <p class="demo">Propuesta general de Gaude IA: no corresponde a un negocio en particular. Al contratar, el asistente se arma con los servicios, precios, horarios y el tono de tu negocio.</p>
+</footer>
+
+<a class="flotante" href="https://wa.me/5492235022628?text=Hola%20Gaude%20IA%2C%20quiero%20info%20sobre%20el%20Asistente%20de%20Turnos%20para%20mi%20negocio." target="_blank" rel="noopener" aria-label="Consultar por WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.6.8 5.1 2.4 7.2L4 29l7.1-2.3c1.5.8 3.2 1.2 4.9 1.2 6.6 0 12-5.3 12-11.9S22.6 3 16 3zm0 21.7c-1.5 0-3-.4-4.3-1.2l-.3-.2-4.2 1.4 1.4-4-.2-.3a9.7 9.7 0 0 1-1.5-5.3C6.9 9.8 11 5.8 16 5.8S25.1 9.8 25.1 15 21 24.7 16 24.7zm5.3-7.2c-.3-.1-1.7-.8-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.1-.2.1-.3.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.7-1.5.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.2-.2-.5-.3z"/></svg>
+</a>
+
+</body>
+</html>
