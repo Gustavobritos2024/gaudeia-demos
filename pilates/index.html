@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fluir — Estudio de Pilates | Demo por rubro Gaude IA</title>
+<meta name="description" content="Página de demostración por rubro de Gaude IA para estudios de pilates: Reformer, Studio, clases grupales reducidas, horarios de mañana y tarde y reservas por WhatsApp. Orientativa y personalizable con el logo, el material y el WhatsApp de cada estudio.">
+<!--
+  ════════════════════════════════════════════════════════════════════
+  DEMO POR RUBRO — PILATES Y ESTUDIOS · Gaude IA
+  Negocio de ejemplo: «Fluir — Estudio de Pilates» (ficticio).
+  Construida sobre el ESTÁNDAR estética-v2 (skill «Diseño sin
+  plantilla»): íconos SVG, etiquetas en frase normal, héroe con
+  titular + una frase + botón, colores desde tokens, foco visible,
+  overflow-x: clip, portada animada con zoom que se apaga — sin
+  ocultar la foto — ante prefers-reduced-motion.
+  ⚠️ NÚMERO DE WHATSAPP PLACEHOLDER: 5491100000000
+     Es un número de EJEMPLO. Al personalizar la demo para un estudio
+     real, reemplazar TODAS las apariciones de 5491100000000 por el
+     WhatsApp verdadero del negocio.
+  Las clases, precios, horarios y la dirección también son de ejemplo.
+  ════════════════════════════════════════════════════════════════════
+-->
+<style>
+  :root{
+    --oscuro:#26332b;
+    --oscuro-2:#32443a;
+    --velo-fuerte:rgba(26,36,30,.92);
+    --velo-medio:rgba(26,36,30,.5);
+    --velo-suave:rgba(26,36,30,.12);
+    --cabecera:rgba(38,51,43,.94);
+    --gris:#5c6b5e;
+    --verde:#5c7a4d;
+    --verde-osc:#47603c;
+    --verde-claro:#cfe0bd;
+    --crema:#f8f7f1;
+    --arena:#e3dfcd;
+    --seccion:#edecdf;
+    --seccion-2:#f0e7d8;
+    --arcilla:#c08552;
+    --tinta:#39413a;
+    --blanco:#fff;
+    --sobre-foto:rgba(255,255,255,.85);
+    --sobre-foto-suave:rgba(255,255,255,.55);
+    --wa:#25d366;
+    --wa-osc:#1eb856;
+    --sombra-foto:0 10px 30px rgba(38,51,43,.22);
+    --sombra-card:0 4px 16px rgba(38,51,43,.07);
+    --sombra-boton:0 8px 24px rgba(0,0,0,.35);
+    --sombra-flotante:0 8px 24px rgba(0,0,0,.3);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;overflow-x:clip}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--crema);
+    color:var(--tinta);
+    line-height:1.6;
+    font-size:17px;
+    overflow-x:clip;
+  }
+  h1,h2,.serif{font-family:Georgia,"Times New Roman",serif;font-weight:500}
+  img{display:block;max-width:100%}
+  a{text-decoration:none}
+  a:focus-visible,.flotante:focus-visible{
+    outline:3px solid var(--verde);
+    outline-offset:3px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:var(--cabecera);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--gris);
+  }
+  .header-in{
+    max-width:1080px;margin:0 auto;padding:10px 18px;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+  }
+  .brand{display:flex;align-items:center;gap:12px;color:var(--blanco)}
+  .brand .monograma{
+    width:46px;height:46px;flex:0 0 46px;border-radius:50%;
+    border:2px solid var(--verde);
+    display:flex;align-items:center;justify-content:center;
+    font-family:Georgia,serif;font-size:20px;color:var(--blanco);
+    background:var(--oscuro-2);
+  }
+  .brand .nombre{font-family:Georgia,serif;font-size:22px;line-height:1.05}
+  .brand .bajada{font-size:13px;color:var(--verde-claro)}
+  .btn-wa-head{
+    background:var(--wa);color:var(--blanco);font-weight:600;font-size:15px;
+    padding:10px 16px;border-radius:999px;white-space:nowrap;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative;min-height:92svh;display:flex;align-items:flex-end;overflow:hidden;background:var(--oscuro)}
+  .hero img.fondo{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    animation:zoom 22s ease-in-out infinite alternate;
+  }
+  @keyframes zoom{from{transform:scale(1)}to{transform:scale(1.08)}}
+  .hero .velo{
+    position:absolute;inset:0;
+    background:linear-gradient(to top,var(--velo-fuerte) 0%,var(--velo-medio) 45%,var(--velo-suave) 75%);
+  }
+  .hero .contenido{
+    position:relative;z-index:2;width:100%;max-width:1080px;margin:0 auto;
+    padding:96px 20px 44px;color:var(--blanco);
+  }
+  .etiqueta{
+    display:flex;align-items:center;gap:10px;
+    font-size:15px;font-weight:600;color:var(--verde-osc);margin-bottom:10px;
+  }
+  .etiqueta::before{
+    content:"";width:26px;height:2px;background:var(--verde);flex:0 0 26px;
+  }
+  .etiqueta-clara{color:var(--blanco)}
+  .hero h1{font-size:50px;line-height:1.05;margin-bottom:10px}
+  .hero .sub{font-size:20px;color:var(--crema);max-width:540px;margin-bottom:26px}
+  .btn-wa{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--wa);color:var(--blanco);font-weight:700;font-size:18px;
+    padding:16px 28px;border-radius:999px;
+    box-shadow:var(--sombra-boton);
+  }
+  .btn-wa:active{background:var(--wa-osc)}
+
+  /* ---------- Secciones ---------- */
+  section{padding:56px 20px}
+  .alt{background:var(--seccion)}
+  .alt-2{background:var(--seccion-2)}
+  .wrap{max-width:1080px;margin:0 auto}
+  h2{font-size:32px;color:var(--oscuro);line-height:1.2;margin-bottom:14px}
+  .lead{font-size:18px;max-width:640px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .chip{
+    background:var(--blanco);border:1px solid var(--arena);color:var(--oscuro);
+    border-radius:999px;padding:8px 16px;font-size:15px;font-weight:600;
+  }
+  .foto-redonda{border-radius:18px;overflow:hidden;margin-top:26px;box-shadow:var(--sombra-foto)}
+  .foto-redonda img{width:100%;height:100%;object-fit:cover}
+
+  /* ---------- Clases / galería ---------- */
+  .grid{display:grid;gap:18px;margin-top:26px}
+  .card{
+    background:var(--blanco);border:1px solid var(--arena);border-radius:18px;
+    padding:26px 22px;box-shadow:var(--sombra-card);
+  }
+  .card .ico{margin-bottom:12px;color:var(--verde)}
+  .card .ico svg{width:34px;height:34px;display:block}
+  .card h3{font-family:Georgia,serif;font-weight:500;font-size:22px;color:var(--oscuro);margin-bottom:8px}
+  .card p{font-size:16px}
+  .card img{border-radius:12px;margin-bottom:16px;width:100%;height:210px;object-fit:cover}
+  .galeria{display:grid;gap:14px;margin-top:26px}
+  .galeria img{border-radius:14px;width:100%;height:240px;object-fit:cover}
+
+  /* ---------- Pasos ---------- */
+  .pasos{display:grid;gap:16px;margin-top:26px}
+  .paso{
+    background:var(--blanco);border:1px solid var(--arena);border-radius:18px;
+    padding:22px;display:flex;gap:16px;align-items:flex-start;
+  }
+  .paso .num{
+    flex:0 0 44px;width:44px;height:44px;border-radius:50%;
+    background:var(--verde);color:var(--blanco);font-family:Georgia,serif;font-size:21px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .paso h3{font-size:18px;color:var(--oscuro);margin-bottom:4px}
+  .paso p{font-size:16px}
+  .centro{text-align:center}
+  .centro .btn-wa{margin-top:28px}
+
+  /* ---------- Contacto / datos ---------- */
+  .contacto-grid{display:grid;gap:18px;margin-top:24px}
+  .dato{background:var(--blanco);border:1px solid var(--arena);border-radius:18px;padding:22px}
+  .dato .rotulo{font-size:15px;font-weight:600;color:var(--verde-osc);margin-bottom:6px}
+  .dato .val{font-size:19px;color:var(--oscuro);font-weight:600}
+  .dato a{color:var(--verde-osc);font-weight:600}
+  .horarios{display:grid;gap:18px;margin-top:26px}
+  .horario{
+    background:var(--oscuro);color:var(--crema);border-radius:18px;padding:22px;
+  }
+  .horario .rotulo{font-size:15px;font-weight:600;color:var(--verde-claro);margin-bottom:6px}
+  .horario .val{font-size:19px;font-weight:600;color:var(--blanco)}
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:var(--oscuro);color:var(--sobre-foto);
+    padding:34px 20px 110px;text-align:center;font-size:14px;
+  }
+  footer .f-nombre{font-family:Georgia,serif;font-size:20px;color:var(--blanco);margin-bottom:6px}
+  footer .demo{margin-top:16px;font-size:12.5px;color:var(--sobre-foto-suave);max-width:640px;margin-left:auto;margin-right:auto}
+
+  /* ---------- Botón flotante ---------- */
+  .flotante{
+    position:fixed;right:18px;bottom:18px;z-index:60;
+    width:62px;height:62px;border-radius:50%;
+    background:var(--wa);display:flex;align-items:center;justify-content:center;
+    box-shadow:var(--sombra-flotante);
+  }
+  .flotante svg{width:32px;height:32px;fill:var(--blanco)}
+  .btn-wa svg{width:22px;height:22px;fill:var(--blanco);flex:0 0 22px}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .hero img.fondo{animation:none}
+  }
+
+  @media(min-width:760px){
+    .hero h1{font-size:66px}
+    h2{font-size:38px}
+    .grid{grid-template-columns:repeat(3,1fr)}
+    .galeria{grid-template-columns:1fr 1fr}
+    .pasos{grid-template-columns:repeat(3,1fr)}
+    .contacto-grid{grid-template-columns:repeat(3,1fr)}
+    .horarios{grid-template-columns:1fr 1fr}
+    .dos-col{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center}
+    .dos-col .foto-redonda{margin-top:0}
+  }
+</style>
+<!-- Schema.org para Google y asistentes de IA — PLACEHOLDER: el teléfono 5491100000000 y la dirección son de muestra; se reemplazan por los reales del estudio -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ExerciseGym",
+  "name": "Fluir — Estudio de Pilates",
+  "description": "Estudio de pilates de ejemplo: Reformer, Studio y clases grupales reducidas, con horarios de mañana y tarde y reservas por WhatsApp.",
+  "telephone": "+5491100000000",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Av. Ejemplo 1234"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "08:00",
+      "closes": "12:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "16:00",
+      "closes": "20:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "09:00",
+      "closes": "12:00"
+    }
+  ],
+  "amenityFeature": [
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Pilates Reformer"
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Pilates Studio: torre y equipos"
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Clases grupales reducidas y mat"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Dónde está el estudio?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "En Av. Ejemplo 1234. Es una dirección de muestra: en la página de tu estudio va tu dirección real."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué clases dan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pilates Reformer, Studio con torre y equipos, y clases grupales reducidas de mat, a la mañana y a la tarde. La lista de esta demo es de ejemplo: en tu página van tus clases reales."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto cuesta?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Los valores de esta demo son de ejemplo: plan de 8 clases de Reformer $60.000 por mes y clase suelta $12.000. En tu página van tus precios reales."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo reservo una clase?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Escribinos por WhatsApp con el botón de esta página: elegís clase y horario y te confirmamos el cupo en el momento."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header>
+  <div class="header-in">
+    <a class="brand" href="#">
+      <span class="monograma">F</span>
+      <span>
+        <span class="nombre">Fluir</span><br>
+        <span class="bajada">Estudio de pilates</span>
+      </span>
+    </a>
+    <!-- ⚠️ PLACEHOLDER: número de WhatsApp de ejemplo (5491100000000) -->
+    <a class="btn-wa-head" href="https://wa.me/5491100000000?text=Hola%2C%20quiero%20reservar%20una%20clase%20de%20prueba.%20%C2%BFMe%20pasan%20horarios%3F" target="_blank" rel="noopener">Reservar</a>
+  </div>
+</header>
+
+<section class="hero">
+  <img class="fondo" src="hero.jpg" alt="Interior luminoso de un estudio de pilates con reformers de madera junto a ventanales">
+  <div class="velo"></div>
+  <div class="contenido">
+    <p class="etiqueta etiqueta-clara">Estudio de pilates</p>
+    <h1>Fuerza, postura y calma</h1>
+    <p class="sub">Reformer y Studio en grupos reducidos, a la mañana y a la tarde.</p>
+    <a class="btn-wa" href="https://wa.me/5491100000000?text=Hola%2C%20quiero%20reservar%20una%20clase%20de%20prueba.%20%C2%BFMe%20pasan%20horarios%3F" target="_blank" rel="noopener">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.6.8 5.1 2.4 7.2L4 29l7.1-2.3c1.5.8 3.2 1.2 4.9 1.2 6.6 0 12-5.3 12-11.9S22.6 3 16 3zm0 21.7c-1.5 0-3-.4-4.3-1.2l-.3-.2-4.2 1.4 1.4-4-.2-.3a9.7 9.7 0 0 1-1.5-5.3C6.9 9.8 11 5.8 16 5.8S25.1 9.8 25.1 15 21 24.7 16 24.7zm5.3-7.2c-.3-.1-1.7-.8-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.1-.2.1-.3.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.7-1.5.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.2-.2-.5-.3z"/></svg>
+      Reservar mi clase
+    </a>
+  </div>
+</section>
+
+<!-- EL ESTUDIO -->
+<section id="estudio">
+  <div class="wrap dos-col">
+    <div>
+      <p class="etiqueta">El estudio</p>
+      <h2>Grupos chicos, atención de verdad</h2>
+      <p class="lead">Nada de clases masivas: cupos reducidos y una instructora que corrige cada movimiento, a tu ritmo.</p>
+      <div class="chips">
+        <span class="chip">Reformer</span>
+        <span class="chip">Studio</span>
+        <span class="chip">Grupos reducidos</span>
+        <span class="chip">Mañana y tarde</span>
+      </div>
+    </div>
+    <div class="foto-redonda">
+      <img src="detalle.jpg" alt="Detalle de un reformer de madera con correas y resortes en el estudio">
+    </div>
+  </div>
+</section>
+
+<!-- CLASES -->
+<section id="clases" class="alt">
+  <div class="wrap">
+    <p class="etiqueta">Clases</p>
+    <h2>Las formas de entrenar acá</h2>
+    <p class="lead">Lista de ejemplo: en tu página, tus clases reales.</p>
+    <div class="grid">
+      <div class="card">
+        <img src="reformer.jpg" alt="Clase de pilates reformer guiada por la instructora">
+        <h3>Reformer</h3>
+        <p>El equipo clásico de pilates: fuerza, alineación y control, con resistencia a tu medida.</p>
+      </div>
+      <div class="card">
+        <img src="torre.jpg" alt="Ejercicio de elongación en la torre de pilates con guía de la instructora">
+        <h3>Studio</h3>
+        <p>Torre, silla y barril: trabajo completo y variado, ideal para avanzar de nivel.</p>
+      </div>
+      <div class="card">
+        <img src="grupal.jpg" alt="Clase grupal reducida de pilates mat sobre colchonetas">
+        <h3>Grupales reducidas</h3>
+        <p>Mat y suelo en grupos chicos: la base del método, con corrección permanente.</p>
+      </div>
+      <div class="card">
+        <p class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v4.5l3 2"/></svg></p>
+        <h3>Principiantes</h3>
+        <p>Nunca hiciste pilates: empezás con una clase de prueba y un plan a tu medida.</p>
+      </div>
+      <div class="card">
+        <p class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5S4 15.5 4 9.8A4.6 4.6 0 0 1 12 7a4.6 4.6 0 0 1 8 2.8c0 5.7-8 10.7-8 10.7z"/></svg></p>
+        <h3>Postura y espalda</h3>
+        <p>Para dolores de espalda, cuello y postura: fortalecer el centro y moverse sin dolor.</p>
+      </div>
+      <div class="card">
+        <p class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 15.5c2.8-2.2 5.7-2.2 8.5 0s5.7 2.2 8.5 0"/><path d="M3.5 10.5c2.8-2.2 5.7-2.2 8.5 0s5.7 2.2 8.5 0" opacity=".55"/></svg></p>
+        <h3>Elongación</h3>
+        <p>Movilidad y respiración para soltar tensiones y cerrar el día liviana.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section id="galeria">
+  <div class="wrap">
+    <p class="etiqueta">Galería</p>
+    <h2>Así es Fluir por dentro</h2>
+    <div class="galeria">
+      <img src="hero.jpg" alt="Sala principal del estudio con los reformers">
+      <img src="reformer.jpg" alt="Clase de reformer en curso">
+      <img src="grupal.jpg" alt="Clase grupal de mat">
+      <img src="torre.jpg" alt="Trabajo en la torre de pilates">
+    </div>
+  </div>
+</section>
+
+<!-- RESERVAS Y HORARIOS -->
+<section id="reservas" class="alt">
+  <div class="wrap">
+    <p class="etiqueta">Reservas</p>
+    <h2>Tu cupo se guarda por WhatsApp</h2>
+    <div class="pasos">
+      <div class="paso">
+        <span class="num">1</span>
+        <div>
+          <h3>Elegís clase y horario</h3>
+          <p>Reformer, Studio o grupal, a la mañana o a la tarde.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <span class="num">2</span>
+        <div>
+          <h3>Escribís por WhatsApp</h3>
+          <p>Con el botón de esta página: clase y horario que querés.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <span class="num">3</span>
+        <div>
+          <h3>Venís a tu clase</h3>
+          <p>Confirmamos el cupo en el momento; traé ropa cómoda.</p>
+        </div>
+      </div>
+    </div>
+    <div class="horarios">
+      <div class="horario">
+        <p class="rotulo">Mañana</p>
+        <p class="val">Lunes a viernes, 8 a 12 h</p>
+        <p>Y sábados de 9 a 12 h. Horarios de muestra: van los de tu estudio.</p>
+      </div>
+      <div class="horario">
+        <p class="rotulo">Tarde</p>
+        <p class="val">Lunes a viernes, 16 a 20 h</p>
+        <p>Ideal para salir del trabajo y entrenar antes de volver a casa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GOOGLE -->
+<section id="google" class="alt-2">
+  <div class="wrap">
+    <p class="etiqueta">Presencia en Google</p>
+    <h2>Te encuentran en Google</h2>
+    <p>Las redes muestran; quien ya decidió, busca en Google. Tu página va junto a tu ficha, completa y conectada.</p>
+    <div class="contacto-grid">
+      <div class="dato">
+        <p class="rotulo">Búsqueda</p>
+        <p class="val">Aparecés en tu rubro y tu ciudad</p>
+        <p>Quien busca pilates en tu ciudad encuentra tu estudio y reserva.</p>
+      </div>
+      <div class="dato">
+        <p class="rotulo">Ficha de Google</p>
+        <p class="val">Completa, con botón a tu WhatsApp</p>
+        <p>Dirección, horarios, fotos y el botón que lleva directo a tu WhatsApp.</p>
+      </div>
+      <div class="dato">
+        <p class="rotulo">Página + ficha</p>
+        <p class="val">Trabajan juntas</p>
+        <p>Tu página y tu ficha conectadas: el que te busca, te encuentra y te escribe.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREGUNTAS FRECUENTES -->
+<section id="faq">
+  <div class="wrap">
+    <p class="etiqueta">Preguntas frecuentes</p>
+    <h2>Preguntas frecuentes</h2>
+    <div class="contacto-grid">
+      <div class="dato">
+        <p class="val">¿Dónde está el estudio?</p>
+        <p>En Av. Ejemplo 1234. Dirección de muestra: en tu página va la real.</p>
+      </div>
+      <div class="dato">
+        <p class="val">¿Qué clases dan?</p>
+        <p>Reformer, Studio y grupales reducidas, a la mañana y a la tarde. En tu página, tus clases reales.</p>
+      </div>
+      <div class="dato">
+        <p class="val">¿Cuánto cuesta?</p>
+        <p>De ejemplo: plan de 8 clases de Reformer $60.000 por mes, clase suelta $12.000. En tu página, tus precios.</p>
+      </div>
+      <div class="dato">
+        <p class="val">¿Cómo reservo una clase?</p>
+        <p>Por WhatsApp, con el botón de esta página: elegís clase y horario y confirmamos el cupo en el momento.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="wrap">
+    <p class="etiqueta">Dónde estamos</p>
+    <h2>Vení a probar una clase</h2>
+    <div class="contacto-grid">
+      <div class="dato">
+        <p class="rotulo">Dirección</p>
+        <p class="val">Av. Ejemplo 1234</p>
+        <p>Dirección de muestra: va la de tu estudio.</p>
+      </div>
+      <div class="dato">
+        <p class="rotulo">Instagram</p>
+        <p class="val">@fluir.pilates.ejemplo</p>
+        <p>Cuenta de muestra: va la de tu estudio.</p>
+      </div>
+      <div class="dato">
+        <p class="rotulo">WhatsApp</p>
+        <p class="val">Botón directo</p>
+        <p>Abre el WhatsApp del estudio, mensaje listo.</p>
+      </div>
+    </div>
+    <div class="centro">
+      <a class="btn-wa" href="https://wa.me/5491100000000?text=Hola%2C%20quiero%20reservar%20una%20clase%20de%20prueba.%20%C2%BFMe%20pasan%20horarios%3F" target="_blank" rel="noopener">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.6.8 5.1 2.4 7.2L4 29l7.1-2.3c1.5.8 3.2 1.2 4.9 1.2 6.6 0 12-5.3 12-11.9S22.6 3 16 3zm0 21.7c-1.5 0-3-.4-4.3-1.2l-.3-.2-4.2 1.4 1.4-4-.2-.3a9.7 9.7 0 0 1-1.5-5.3C6.9 9.8 11 5.8 16 5.8S25.1 9.8 25.1 15 21 24.7 16 24.7zm5.3-7.2c-.3-.1-1.7-.8-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.1-.2.1-.3.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.7-1.5.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.2-.2-.5-.3z"/></svg>
+        Reservar mi clase
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="f-nombre">Fluir — Estudio de Pilates</p>
+  <p>Pilates · Reformer · Studio</p>
+  <p class="demo">Demostración por rubro de Gaude IA: negocio, precios, fotos y WhatsApp de ejemplo. Al contratar, van el material y los datos reales de tu estudio.</p>
+</footer>
+
+<!-- ⚠️ PLACEHOLDER: número de WhatsApp de ejemplo (5491100000000) -->
+<a class="flotante" href="https://wa.me/5491100000000?text=Hola%2C%20quiero%20reservar%20una%20clase%20de%20prueba.%20%C2%BFMe%20pasan%20horarios%3F" target="_blank" rel="noopener" aria-label="Consultar por WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.6.8 5.1 2.4 7.2L4 29l7.1-2.3c1.5.8 3.2 1.2 4.9 1.2 6.6 0 12-5.3 12-11.9S22.6 3 16 3zm0 21.7c-1.5 0-3-.4-4.3-1.2l-.3-.2-4.2 1.4 1.4-4-.2-.3a9.7 9.7 0 0 1-1.5-5.3C6.9 9.8 11 5.8 16 5.8S25.1 9.8 25.1 15 21 24.7 16 24.7zm5.3-7.2c-.3-.1-1.7-.8-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.1-.2.1-.3.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.7-1.5.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.2-.2-.5-.3z"/></svg>
+</a>
+
+</body>
+</html>
