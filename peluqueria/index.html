@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brisa — Peluquería &amp; Estilo | Demo por rubro Gaude IA</title>
+<meta name="description" content="Página de demostración por rubro de Gaude IA para peluquerías y estilistas: corte, color, balayage, alisados, nutrición capilar y barbería, con turnos por WhatsApp. Orientativa y personalizable con el logo, el material y el WhatsApp de cada salón.">
+<!--
+  ════════════════════════════════════════════════════════════════════
+  DEMO POR RUBRO — PELUQUERÍA Y ESTILISTAS · Gaude IA
+  Negocio de ejemplo: «Brisa — Peluquería & Estilo» (ficticio).
+  Construida sobre el ESTÁNDAR estética-v2 (skill «Diseño sin
+  plantilla»): íconos SVG, etiquetas en frase normal, héroe con
+  titular + una frase + botón, colores desde tokens, foco visible,
+  overflow-x: clip, portada animada con zoom que se apaga — sin
+  ocultar la foto — ante prefers-reduced-motion.
+  ⚠️ NÚMERO DE WHATSAPP PLACEHOLDER: 5491100000000
+     Es un número de EJEMPLO. Al personalizar la demo para un salón
+     real, reemplazar TODAS las apariciones de 5491100000000 por el
+     WhatsApp verdadero del negocio.
+  Los servicios, precios, horarios y la dirección también son de ejemplo.
+  ════════════════════════════════════════════════════════════════════
+-->
+<style>
+  :root{
+    --oscuro:#2b2320;
+    --oscuro-2:#3a2f28;
+    --velo-fuerte:rgba(30,24,20,.92);
+    --velo-medio:rgba(30,24,20,.5);
+    --velo-suave:rgba(30,24,20,.12);
+    --cabecera:rgba(43,35,32,.94);
+    --gris:#6b5a4a;
+    --cobre:#b26a41;
+    --cobre-osc:#96552f;
+    --cobre-claro:#eec39f;
+    --crema:#faf5ee;
+    --arena:#ecdbc7;
+    --seccion:#f3e8d7;
+    --seccion-2:#e7ede4;
+    --verde:#3f5a50;
+    --tinta:#3d332a;
+    --blanco:#fff;
+    --sobre-foto:rgba(255,255,255,.85);
+    --sobre-foto-suave:rgba(255,255,255,.55);
+    --wa:#25d366;
+    --wa-osc:#1eb856;
+    --sombra-foto:0 10px 30px rgba(43,35,32,.22);
+    --sombra-card:0 4px 16px rgba(43,35,32,.07);
+    --sombra-boton:0 8px 24px rgba(0,0,0,.35);
+    --sombra-flotante:0 8px 24px rgba(0,0,0,.3);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;overflow-x:clip}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--crema);
+    color:var(--tinta);
+    line-height:1.6;
+    font-size:17px;
+    overflow-x:clip;
+  }
+  h1,h2,.serif{font-family:Georgia,"Times New Roman",serif;font-weight:500}
+  img{display:block;max-width:100%}
+  a{text-decoration:none}
+  a:focus-visible,.flotante:focus-visible{
+    outline:3px solid var(--cobre);
+    outline-offset:3px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:var(--cabecera);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--gris);
+  }
+  .header-in{
+    max-width:1080px;margin:0 auto;padding:10px 18px;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+  }
+  .brand{display:flex;align-items:center;gap:12px;color:var(--blanco)}
+  .brand .monograma{
+    width:46px;height:46px;flex:0 0 46px;border-radius:50%;
+    border:2px solid var(--cobre);
+    display:flex;align-items:center;justify-content:center;
+    font-family:Georgia,serif;font-size:20px;color:var(--blanco);
+    background:var(--oscuro-2);
+  }
+  .brand .nombre{font-family:Georgia,serif;font-size:22px;line-height:1.05}
+  .brand .bajada{font-size:13px;color:var(--cobre-claro)}
+  .btn-wa-head{
+    background:var(--wa);color:var(--blanco);font-weight:600;font-size:15px;
+    padding:10px 16px;border-radius:999px;white-space:nowrap;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative;min-height:92svh;display:flex;align-items:flex-end;overflow:hidden;background:var(--oscuro)}
+  .hero img.fondo{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    animation:zoom 22s ease-in-out infinite alternate;
+  }
+  @keyframes zoom{from{transform:scale(1)}to{transform:scale(1.08)}}
+  .hero .velo{
+    position:absolute;inset:0;
+    background:linear-gradient(to top,var(--velo-fuerte) 0%,var(--velo-medio) 45%,var(--velo-suave) 75%);
+  }
+  .hero .contenido{
+    position:relative;z-index:2;width:100%;max-width:1080px;margin:0 auto;
+    padding:96px 20px 44px;color:var(--blanco);
+  }
+  .etiqueta{
+    display:flex;align-items:center;gap:10px;
+    font-size:15px;font-weight:600;color:var(--cobre-osc);margin-bottom:10px;
+  }
+  .etiqueta::before{
+    content:"";width:26px;height:2px;background:var(--cobre);flex:0 0 26px;
+  }
+  .etiqueta-clara{color:var(--blanco)}
+  .hero h1{font-size:50px;line-height:1.05;margin-bottom:10px}
+  .hero .sub{font-size:20px;color:var(--crema);max-width:540px;margin-bottom:26px}
+  .btn-wa{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--wa);color:var(--blanco);font-weight:700;font-size:18px;
+    padding:16px 28px;border-radius:999px;
+    box-shadow:var(--sombra-boton);
+  }
+  .btn-wa:active{background:var(--wa-osc)}
+
+  /* ---------- Secciones ---------- */
+  section{padding:56px 20px}
+  .alt{background:var(--seccion)}
+  .alt-2{background:var(--seccion-2)}
+  .wrap{max-width:1080px;margin:0 auto}
+  h2{font-size:32px;color:var(--oscuro);line-height:1.2;margin-bottom:14px}
+  .lead{font-size:18px;max-width:640px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .chip{
+    background:var(--blanco);border:1px solid var(--arena);color:var(--oscuro);
+    border-radius:999px;padding:8px 16px;font-size:15px;font-weight:600;
+  }
+  .foto-redonda{border-radius:18px;overflow:hidden;margin-top:26px;box-shadow:var(--sombra-foto)}
+  .foto-redonda img{width:100%;height:100%;object-fit:cover}
+
+  /* ---------- Servicios / galería ---------- */
+  .grid{display:grid;gap:18px;margin-top:26px}
+  .card{
+    background:var(--blanco);border:1px solid var(--arena);border-radius:18px;
+    padding:26px 22px;box-shadow:var(--sombra-card);
+  }
+  .card .ico{margin-bottom:12px;color:var(--cobre)}
+  .card .ico svg{width:34px;height:34px;display:block}
+  .card h3{font-family:Georgia,serif;font-weight:500;font-size:22px;color:var(--oscuro);margin-bottom:8px}
+  .card p{font-size:16px}
+  .card img{border-radius:12px;margin-bottom:16px;width:100%;height:210px;object-fit:cover}
+  .galeria{display:grid;gap:14px;margin-top:26px}
+  .galeria img{border-radius:14px;width:100%;height:240px;object-fit:cover}
+
+  /* ---------- Pasos ---------- */
+  .pasos{display:grid;gap:16px;margin-top:26px}
+  .paso{
+    background:var(--blanco);border:1px solid var(--arena);border-radius:18px;
+    padding:22px;display:flex;gap:16px;align-items:flex-start;
+  }
+  .paso .num{
+    flex:0 0 44px;width:44px;height:44px;border-radius:50%;
+    background:var(--cobre);color:var(--blanco);font-family:Georgia,serif;font-size:21px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .paso h3{font-size:18px;color:var(--oscuro);margin-bottom:4px}
+  .paso p{font-size:16px}
+  .centro{text-align:center}
+  .centro .btn-wa{margin-top:28px}
+
+  /* ---------- Contacto / datos ---------- */
+  .contacto-grid{display:grid;gap:18px;margin-top:24px}
+  .dato{background:var(--blanco);border:1px solid var(--arena);border-radius:18px;padding:22px}
+  .dato .rotulo{font-size:15px;font-weight:600;color:var(--cobre-osc);margin-bottom:6px}
+  .dato .val{font-size:19px;color:var(--oscuro);font-weight:600}
+  .dato a{color:var(--cobre-osc);font-weight:600}
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:var(--oscuro);color:var(--sobre-foto);
+    padding:34px 20px 110px;text-align:center;font-size:14px;
+  }
+  footer .f-nombre{font-family:Georgia,serif;font-size:20px;color:var(--blanco);margin-bottom:6px}
+  footer .demo{margin-top:16px;font-size:12.5px;color:var(--sobre-foto-suave);max-width:640px;margin-left:auto;margin-right:auto}
+
+  /* ---------- Botón flotante ---------- */
+  .flotante{
+    position:fixed;right:18px;bottom:18px;z-index:60;
+    width:62px;height:62px;border-radius:50%;
+    background:var(--wa);display:flex;align-items:center;justify-content:center;
+    box-shadow:var(--sombra-flotante);
+  }
+  .flotante svg{width:32px;height:32px;fill:var(--blanco)}
+  .btn-wa svg{width:22px;height:22px;fill:var(--blanco);flex:0 0 22px}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .hero img.fondo{animation:none}
+  }
+
+  @media(min-width:760px){
+    .hero h1{font-size:66px}
+    h2{font-size:38px}
+    .grid{grid-template-columns:repeat(3,1fr)}
+    .galeria{grid-template-columns:1fr 1fr}
+    .pasos{grid-template-columns:repeat(3,1fr)}
+    .contacto-grid{grid-template-columns:repeat(3,1fr)}
+    .dos-col{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center}
+    .dos-col .foto-redonda{margin-top:0}
+  }
+</style>
+<!-- Schema.org para Google y asistentes de IA — PLACEHOLDER: el teléfono 5491100000000 y la dirección son de muestra; se reemplazan por los reales del salón -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HairSalon",
+  "name": "Brisa — Peluquería & Estilo",
+  "description": "Peluquería de ejemplo: corte, color y balayage, alisados, nutrición y botox capilar y barbería, con turnos por WhatsApp.",
+  "telephone": "+5491100000000",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Av. Ejemplo 1234"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "09:00",
+      "closes": "20:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "09:00",
+      "closes": "18:00"
+    }
+  ],
+  "amenityFeature": [
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Corte y peinado"
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Color, balayage y alisados"
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Nutrición y botox capilar"
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Barbería"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Dónde está el salón?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "En Av. Ejemplo 1234. Es una dirección de muestra: en la página de tu salón va tu dirección real."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué servicios hacen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Corte, color y balayage, alisados, nutrición y botox capilar, barbería y peinados para eventos. La lista de esta demo es de ejemplo: en tu página van tus servicios reales."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto cuesta?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Los valores de esta demo son de ejemplo: corte $15.000, balayage desde $45.000 y barba $10.000. En tu página van tus precios reales."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo reservo un turno?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Escribinos por WhatsApp con el botón de esta página: elegís servicio y horario y te confirmamos en el momento."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header>
+  <div class="header-in">
+    <a class="brand" href="#">
+      <span class="monograma">B</span>
+      <span>
+        <span class="nombre">Brisa</span><br>
+        <span class="bajada">Peluquería y estilo</span>
+      </span>
+    </a>
+    <!-- ⚠️ PLACEHOLDER: número de WhatsApp de ejemplo (5491100000000) -->
+    <a class="btn-wa-head" href="https://wa.me/5491100000000?text=Hola%2C%20quiero%20reservar%20un%20turno.%20%C2%BFMe%20pasan%20info%20y%20horarios%3F" target="_blank" rel="noopener">Turnos</a>
+  </div>
+</header>
+
+<section class="hero">
+  <img class="fondo" src="hero.jpg" alt="Interior cálido de una peluquería, con espejos de madera, sillones y luz natural">
+  <div class="velo"></div>
+  <div class="contenido">
+    <p class="etiqueta etiqueta-clara">Peluquería y barbería</p>
+    <h1>Tu pelo, en buenas manos</h1>
+    <p class="sub">Corte, color, balayage y barbería, con turnos por WhatsApp.</p>
+    <a class="btn-wa" href="https://wa.me/5491100000000?text=Hola%2C%20quiero%20reservar%20un%20turno.%20%C2%BFMe%20pasan%20info%20y%20horarios%3F" target="_blank" rel="noopener">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.6.8 5.1 2.4 7.2L4 29l7.1-2.3c1.5.8 3.2 1.2 4.9 1.2 6.6 0 12-5.3 12-11.9S22.6 3 16 3zm0 21.7c-1.5 0-3-.4-4.3-1.2l-.3-.2-4.2 1.4 1.4-4-.2-.3a9.7 9.7 0 0 1-1.5-5.3C6.9 9.8 11 5.8 16 5.8S25.1 9.8 25.1 15 21 24.7 16 24.7zm5.3-7.2c-.3-.1-1.7-.8-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.1-.2.1-.3.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.7-1.5.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.2-.2-.5-.3z"/></svg>
+      Reservar mi turno
+    </a>
+  </div>
+</section>
+
+<!-- EL SALÓN -->
+<section id="salon">
+  <div class="wrap dos-col">
+    <div>
+      <p class="etiqueta">El salón</p>
+      <h2>Un salón de barrio, de los de siempre</h2>
+      <p class="lead">Entrás por un corte y te quedás por el trato: te conocen, te asesoran y te vas con el pelo como querías.</p>
+      <div class="chips">
+        <span class="chip">Corte</span>
+        <span class="chip">Color</span>
+        <span class="chip">Balayage</span>
+        <span class="chip">Alisados</span>
+        <span class="chip">Barbería</span>
+      </div>
+    </div>
+    <div class="foto-redonda">
+      <img src="detalle.jpg" alt="Puesto de trabajo de la peluquería con espejo, tijeras, peines y secador sobre el mostrador">
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios" class="alt">
+  <div class="wrap">
+    <p class="etiqueta">Servicios</p>
+    <h2>Todo lo que podés hacerte acá</h2>
+    <p class="lead">Lista de ejemplo: en tu página, tus servicios reales.</p>
+    <div class="grid">
+      <div class="card">
+        <img src="corte.jpg" alt="Estilista cortando el pelo a una clienta">
+        <h3>Corte</h3>
+        <p>Cortes para ellas y ellos, con asesoramiento según tu pelo y tu estilo.</p>
+      </div>
+      <div class="card">
+        <img src="color.jpg" alt="Pelo largo con balayage en tonos caramelo">
+        <h3>Color y balayage</h3>
+        <p>Tintura, reflejos, balayage y babylights, con diagnóstico previo sin cargo.</p>
+      </div>
+      <div class="card">
+        <img src="barberia.jpg" alt="Barbero arreglando la barba de un cliente">
+        <h3>Barbería</h3>
+        <p>Corte masculino, arreglo de barba y navaja, en un rincón pensado para ellos.</p>
+      </div>
+      <div class="card">
+        <p class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v18M12 3v18M18 3v18"/><path d="M3 8h18M3 16h18" opacity=".45"/></svg></p>
+        <h3>Alisados</h3>
+        <p>Alisado progresivo y shock de keratina: pelo lacio, suave y sin frizz por meses.</p>
+      </div>
+      <div class="card">
+        <p class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c1.8 2.6 6 4.2 6 9a6 6 0 1 1-12 0c0-4.8 4.2-6.4 6-9z"/><path d="M9.5 13.5a2.8 2.8 0 0 0 2 3.5"/></svg></p>
+        <h3>Nutrición y botox capilar</h3>
+        <p>Tratamientos de reconstrucción e hidratación profunda para pelo dañado o teñido.</p>
+      </div>
+      <div class="card">
+        <p class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4l1.7 4.8L17.5 10l-4.8 1.7L11 16.5l-1.7-4.8L4.5 10l4.8-1.2L11 4z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2z"/></svg></p>
+        <h3>Peinados para eventos</h3>
+        <p>Recogidos, ondas y peinados de fiesta: quince, casamientos y egresadas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section id="galeria">
+  <div class="wrap">
+    <p class="etiqueta">Galería</p>
+    <h2>Así es Brisa por dentro</h2>
+    <div class="galeria">
+      <img src="hero.jpg" alt="Interior de la peluquería Brisa, con espejos y sillones">
+      <img src="corte.jpg" alt="Trabajo de corte en el salón">
+      <img src="color.jpg" alt="Resultado de balayage en tonos caramelo">
+      <img src="barberia.jpg" alt="Rincón de barbería del salón">
+    </div>
+  </div>
+</section>
+
+<!-- TURNOS -->
+<section id="turnos" class="alt">
+  <div class="wrap">
+    <p class="etiqueta">Turnos</p>
+    <h2>Reservar es así de simple</h2>
+    <div class="pasos">
+      <div class="paso">
+        <span class="num">1</span>
+        <div>
+          <h3>Elegís el servicio</h3>
+          <p>Mirás la lista y elegís, o nos contás qué querés hacerte.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <span class="num">2</span>
+        <div>
+          <h3>Escribís por WhatsApp</h3>
+          <p>Con el botón de esta página: servicio y horario.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <span class="num">3</span>
+        <div>
+          <h3>Venís y salís renovada</h3>
+          <p>Confirmamos en el momento; del resto nos ocupamos nosotros.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GOOGLE -->
+<section id="google" class="alt-2">
+  <div class="wrap">
+    <p class="etiqueta">Presencia en Google</p>
+    <h2>Te encuentran en Google</h2>
+    <p>Las redes muestran; quien ya decidió, busca en Google. Tu página va junto a tu ficha, completa y conectada.</p>
+    <div class="contacto-grid">
+      <div class="dato">
+        <p class="rotulo">Búsqueda</p>
+        <p class="val">Aparecés en tu rubro y tu ciudad</p>
+        <p>Quien busca una peluquería en tu ciudad encuentra tu salón y reserva.</p>
+      </div>
+      <div class="dato">
+        <p class="rotulo">Ficha de Google</p>
+        <p class="val">Completa, con botón a tu WhatsApp</p>
+        <p>Dirección, horarios, fotos y el botón que lleva directo a tu WhatsApp.</p>
+      </div>
+      <div class="dato">
+        <p class="rotulo">Página + ficha</p>
+        <p class="val">Trabajan juntas</p>
+        <p>Tu página y tu ficha conectadas: el que te busca, te encuentra y te escribe.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREGUNTAS FRECUENTES -->
+<section id="faq">
+  <div class="wrap">
+    <p class="etiqueta">Preguntas frecuentes</p>
+    <h2>Preguntas frecuentes</h2>
+    <div class="contacto-grid">
+      <div class="dato">
+        <p class="val">¿Dónde está el salón?</p>
+        <p>En Av. Ejemplo 1234. Dirección de muestra: en tu página va la real.</p>
+      </div>
+      <div class="dato">
+        <p class="val">¿Qué servicios hacen?</p>
+        <p>Corte, color y balayage, alisados, nutrición capilar, barbería y peinados. En tu página, tus servicios reales.</p>
+      </div>
+      <div class="dato">
+        <p class="val">¿Cuánto cuesta?</p>
+        <p>De ejemplo: corte $15.000, balayage desde $45.000, barba $10.000. En tu página, tus precios.</p>
+      </div>
+      <div class="dato">
+        <p class="val">¿Cómo reservo un turno?</p>
+        <p>Por WhatsApp, con el botón de esta página: elegís servicio y horario y confirmamos en el momento.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="wrap">
+    <p class="etiqueta">Dónde estamos</p>
+    <h2>Pasá a conocernos</h2>
+    <div class="contacto-grid">
+      <div class="dato">
+        <p class="rotulo">Dirección</p>
+        <p class="val">Av. Ejemplo 1234</p>
+        <p>Dirección de muestra: va la de tu salón.</p>
+      </div>
+      <div class="dato">
+        <p class="rotulo">Instagram</p>
+        <p class="val">@brisa.peluqueria.ejemplo</p>
+        <p>Cuenta de muestra: va la de tu salón.</p>
+      </div>
+      <div class="dato">
+        <p class="rotulo">WhatsApp</p>
+        <p class="val">Botón directo</p>
+        <p>Abre el WhatsApp del salón, mensaje listo.</p>
+      </div>
+    </div>
+    <div class="centro">
+      <a class="btn-wa" href="https://wa.me/5491100000000?text=Hola%2C%20quiero%20reservar%20un%20turno.%20%C2%BFMe%20pasan%20info%20y%20horarios%3F" target="_blank" rel="noopener">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.6.8 5.1 2.4 7.2L4 29l7.1-2.3c1.5.8 3.2 1.2 4.9 1.2 6.6 0 12-5.3 12-11.9S22.6 3 16 3zm0 21.7c-1.5 0-3-.4-4.3-1.2l-.3-.2-4.2 1.4 1.4-4-.2-.3a9.7 9.7 0 0 1-1.5-5.3C6.9 9.8 11 5.8 16 5.8S25.1 9.8 25.1 15 21 24.7 16 24.7zm5.3-7.2c-.3-.1-1.7-.8-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.1-.2.1-.3.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.7-1.5.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.2-.2-.5-.3z"/></svg>
+        Reservar mi turno
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="f-nombre">Brisa — Peluquería &amp; Estilo</p>
+  <p>Peluquería · Color · Barbería</p>
+  <p class="demo">Demostración por rubro de Gaude IA: negocio, precios, fotos y WhatsApp de ejemplo. Al contratar, van el material y los datos reales de tu salón.</p>
+</footer>
+
+<!-- ⚠️ PLACEHOLDER: número de WhatsApp de ejemplo (5491100000000) -->
+<a class="flotante" href="https://wa.me/5491100000000?text=Hola%2C%20quiero%20reservar%20un%20turno.%20%C2%BFMe%20pasan%20info%20y%20horarios%3F" target="_blank" rel="noopener" aria-label="Consultar por WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.6.8 5.1 2.4 7.2L4 29l7.1-2.3c1.5.8 3.2 1.2 4.9 1.2 6.6 0 12-5.3 12-11.9S22.6 3 16 3zm0 21.7c-1.5 0-3-.4-4.3-1.2l-.3-.2-4.2 1.4 1.4-4-.2-.3a9.7 9.7 0 0 1-1.5-5.3C6.9 9.8 11 5.8 16 5.8S25.1 9.8 25.1 15 21 24.7 16 24.7zm5.3-7.2c-.3-.1-1.7-.8-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.1-.2.1-.3.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.7-1.5.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.2-.2-.5-.3z"/></svg>
+</a>
+
+</body>
+</html>
